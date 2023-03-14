@@ -11,6 +11,12 @@ _Descripción del proyecto_
 
 _Aquí tendríamos que poner qué comandas hacen falta para que el proyecto funcione por ejemplo_
 
+tsc --init
+npm init -y
+npm i express cors dotenv multer mongoose
+npm i @types/express @types/cors @types/dotenv @types/multer @types/mongoose -D
+
+
 Mira **Deployment** para notas adicionales sobre el proyecto.
 
 
@@ -18,31 +24,36 @@ Mira **Deployment** para notas adicionales sobre el proyecto.
 
 _Que cosas necesitas para instalar el software y como instalarlas_
 
-```
-Poner un ejemplo
-```
-
+Lo principal que se deberia instalar por ahora:
+- VS code
+- MongoDB
+- Node.js
+- npm (Va incluido con Node)
+- typescrip --> (npm i typescript -g)
+- ts-node (Para hace transcompilación) --> (npm i ts-node -g)
+- nodemon (Para probar el codigo de forma continuada) --> (npm i nodemon -g)
 ### Instalación 🔧
 
 _Qué tiene que hacer el que hace el gitclone para que le funcione el proyecto_
 
 _Pasos_
 
-```
-Ejemplo
-```
+git clone https://github.com/oscarboullosa/Backend-EA.git
 
-_Paso_
+// Una vez tenemos esto, hemos de inicialicar tsc y npm con las comandas vistas anteriormente
 
-```
-hasta acabar
-```
+// No hace falta instalar por separado los paquetes como mongoose o express si ya han sido instalados previamente en otro ordenador que ha subido el proyecto
+// A cambio se ha de poner después de la inicialización el comando:
+npm install
 
 _Finaliza con un ejemplo de cómo obtener datos del sistema o como usarlos para una pequeña demo_
+
 
 ## Ejecutando las pruebas ⚙️
 
 _Explicar como ejecutar las pruebas (si las hay)_
+
+- Test unitarios?
 
 ### Analizar pruebas (si las hay) 🔩
 
@@ -66,11 +77,19 @@ _Agrega notas adicionales sobre como hacer el despliegue_
 
 ## Construido con 🛠️
 
-_Mencionar erramientas que hemos utilizado. Unos ejemplos aqui abajo (aqui iria node,expres...)_
+_Mencionar herramientas que hemos utilizado. Unos ejemplos aqui abajo (aqui iria node,expres...)_
 
 * [Dropwizard](http://www.dropwizard.io/1.0.2/docs/) - El framework web usado
 * [Maven](https://maven.apache.org/) - Manejador de dependencias
 * [ROME](https://rometools.github.io/rome/) - Usado para generar RSS
+* [Node.js] (https://nodejs.org/en/) - Usado para transcompilar y manejar typescript
+* [MongoDB] (https://www.mongodb.com/try/download/community) - Usado para el manejo de la base de datos no relacional
+* [Nodemon] (https://nodemon.io/) - Usado para el entorno de desarrollo, cada vez que se hace una modificación el codigo se reejecuta automaticamente
+* [CORS] (https://developer.mozilla.org/es/docs/Web/HTTP/CORS) - Para el manejo de las rutas de la API
+* [express] (https://www.toptal.com/express-js/nodejs-typescript-rest-api-pt-1) - Para manejar la API
+* [dotenv] (https://www.npmjs.com/package/dotenv) - Para manejo de las variables de entorno
+* [multer] (https://www.npmjs.com/package/multer) - Para subir ficheros 
+
 
 ## Contribuyendo 🖇️
 Esta parte igual no es tan interesante en nuestro caso pero la dejo por si acaso
