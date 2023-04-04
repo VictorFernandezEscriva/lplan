@@ -12,13 +12,12 @@ const registerNewUser = async ({ nameUser, surnameUser, passwordUser, mailUser, 
     return registerNewUser;
   };
 
-  const loginUser = async ({ mailUser, passwordUser }: Auth) => {
+const loginUser = async ({ mailUser, passwordUser }: Auth) => {
     const checkIs = await UserModel.findOne({ mailUser });
     if (!checkIs) return "NOT_FOUND_USER";
   
     const passwordHash = checkIs.passwordUser; 
     const isCorrect = await verified(passwordUser, passwordHash);
-  
     if (!isCorrect) return "PASSWORD_INCORRECT";
   
     const token = generateToken(checkIs.mailUser, checkIs.roleUser);
