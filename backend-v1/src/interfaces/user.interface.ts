@@ -4,14 +4,14 @@ import { Auth } from "./auth.interface";
 export interface User extends Auth {
     nameUser: string;
     surnameUser: string;
-    birthdateUser: string;
-    genderUser: "masculino" | "femenino";
-    mailUser: string;
+    photoUser: ImageBitmap;
+    birthdateUser: Date;
+    genderUser: "male" | "female";
     ocupationUser?: string;
-    passwordUser: string;
     descriptionUser: string;
-    roleUser: "admin" | "common";
+    roleUser: "admin" | "common" | "verified" | "business";
     privacyUser: boolean;
+    deletedUser: boolean;
     followersUser?: ObjectId[];
     followedUser?: ObjectId[];
 }

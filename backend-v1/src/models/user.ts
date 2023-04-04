@@ -3,7 +3,6 @@ import { User } from "../interfaces/user.interface";
 
 const UserSchema = new Schema<User>(
     {
-        
         nameUser:{
             type: String,
             required:true,
@@ -12,8 +11,12 @@ const UserSchema = new Schema<User>(
             type: String,
             required:true,
         },
+        photoUser:{
+            type: ImageBitmap,
+            required: true,
+        },
         birthdateUser:{
-            type: String,
+            type: Schema.Types.Date,
             required:true,
         },
         mailUser:{
@@ -23,7 +26,7 @@ const UserSchema = new Schema<User>(
         },
         genderUser:{
             type: String,
-            enum:["masculino","femenino"],
+            enum:["male","female"],
             required:true,
         },
         ocupationUser:{
@@ -44,7 +47,11 @@ const UserSchema = new Schema<User>(
         },
         roleUser:{
             type: String,
-            enum:["admin","common"],
+            enum:["admin","common","verified","business"],
+            required:true,
+        },
+        deletedUser: {
+            type: Boolean,
             required:true,
         },
         followersUser:{
