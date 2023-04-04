@@ -19,20 +19,25 @@ const ActivitySchema = new Schema<Activity>(
             required: true,
         },
         photoActivity:{
-            type: [String],
+            type: String,
             required:false,
         },
         dateActivity:{
-            type: String,
+            type: Schema.Types.Date,
             required: true,
         },
         hoursActivity:{
             type: [String],
             required: true,
         },
+        idLocation:{
+            type: Schema.Types.ObjectId,
+            ref:'locations',
+            required:false,
+        },
         descriptionActivity:{
             type: String,
-            required:true,
+            required: false,
         },
         privacyActivity:{
             type: Boolean,
@@ -42,12 +47,7 @@ const ActivitySchema = new Schema<Activity>(
             type: String,
             enum:["verificado","common", "empresa"],
             required:true,
-        },
-        idLocation:{
-            type: Schema.Types.ObjectId,
-            ref:'locations',
-            required:false,
-        },
+        }
     },
     {
         timestamps: true,

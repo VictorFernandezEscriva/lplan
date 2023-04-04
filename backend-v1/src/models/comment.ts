@@ -5,7 +5,7 @@ import { Comment } from "../interfaces/comment.interface";
 const CommentSchema = new Schema<Comment>(
     {
         idUserComment:{
-            type: [Schema.Types.ObjectId],
+            type: Schema.Types.ObjectId,
             ref:'users',
             required:true,
         },
@@ -22,6 +22,10 @@ const CommentSchema = new Schema<Comment>(
             type: [Schema.Types.ObjectId],
             ref:'comments',
             required:false,
+        },
+        dateComment:{
+            type: Schema.Types.Date,
+            required:true,
         },
     },
     {

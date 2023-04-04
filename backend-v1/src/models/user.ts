@@ -3,6 +3,11 @@ import { User } from "../interfaces/user.interface";
 
 const UserSchema = new Schema<User>(
     {
+        appUser:{
+            type: String,
+            required:true,
+            unique: true,
+        },
         nameUser:{
             type: String,
             required:true,

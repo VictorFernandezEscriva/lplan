@@ -5,12 +5,12 @@ import { Application } from '../interfaces/application.interface';
 const ApplicationSchema = new Schema<Application>(
     {
         idSender:{
-            type: [Schema.Types.ObjectId],
+            type: Schema.Types.ObjectId,
             ref:'users',
             required:true,
         },
         idReceiver:{
-            type: [Schema.Types.ObjectId],
+            type: Schema.Types.ObjectId,
             ref:'users',
             required:true,
         },
@@ -20,14 +20,14 @@ const ApplicationSchema = new Schema<Application>(
             required: true,
         },
         idActivity:{
-            type: [Schema.Types.ObjectId],
+            type: Schema.Types.ObjectId,
             ref:'activities',
             required:true,
         },
         descriptionApplication:{
             type: String,
             required:false,
-        },
+        }
     },
     {
         timestamps: true,

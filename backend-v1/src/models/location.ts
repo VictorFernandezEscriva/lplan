@@ -18,7 +18,7 @@ const LocationSchema = new Schema<Location>(
         },
         descriptionLocation:{
             type: String,
-            required:true,
+            required:false,
         },
     },
     {

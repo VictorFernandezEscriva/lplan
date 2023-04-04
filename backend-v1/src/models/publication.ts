@@ -1,8 +1,6 @@
 import {  Schema, Types, model, Model } from "mongoose";
 import { Publication } from "../interfaces/publication.interface";
 
-
-
 const PublicationSchema = new Schema<Publication>(
     {
         idUserPublication:{
@@ -17,10 +15,10 @@ const PublicationSchema = new Schema<Publication>(
         },
         textPublication:{
             type:String,
-            required:true,
+            required:false,
         },
         photoPublication:{
-            type:ImageBitmap,
+            type:[String],
             required:true,
         },
         commentsPublication:{
