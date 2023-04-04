@@ -9,6 +9,11 @@ const CommentSchema = new Schema<Comment>(
             ref:'users',
             required:true,
         },
+        idPublicationComment:{
+            type: String,
+            ref:'publications',
+            required:true,
+        },
         textComment:{
             type: String,
             required:true,
