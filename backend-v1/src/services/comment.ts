@@ -1,31 +1,43 @@
 //In charge to connect with the dB
-import { User } from "../interfaces/user.interface";
-import UserModel from "../models/user";
+import { ObjectId } from "mongoose";
+import { Comment } from "../interfaces/comment.interface";
+import CommentModel from "../models/comment";
+import paginate from 'mongoose-paginate-v2';
 
-const insertUser = async(item: User) => {
-    const responseInsert = await UserModel.create(item);
+
+
+
+// (1) Get (obtain) comments ...
+const getCommentsPublication = async(idPublication: string, numPage: string) => {
+    const comentariosPorPagina = 2;
+    const salto = (parseInt(numPage) - 1) * comentariosPorPagina;
+    const responseItem = await CommentModel.find({ idPublicationComment:idPublication }).skip(salto).limit(comentariosPorPagina).exec();// Saltar los comentarios ya vistos// Limitar la cantidad de comentarios devueltos
+    return responseItem;
+};
+
+// (2) Post (creation) of a comment of a publication ...
+const postCommentPublication = async(item: Comment) => {
+    const responseInsert = await CommentModel.create(item);
     return responseInsert;
 };
 
-const getUsers = async() => {
-    const responseItem = await UserModel.find({});
+// (3) Post (creation) of an answer to a comment ...
+const postAnswerPublication = async(idComment:string, item: Comment) => {
+    const responseInsert = await CommentModel.create(item);
+    const responseItem = await CommentModel.findOne({ _id: idComment }, { $addToSet: { responseComment: responseInsert._id } },{new: true});
     return responseItem;
 };
 
-const getUser = async(id: string) => {
-    const responseItem = await UserModel.findOne({_id: id});
+// (4) Put (edition) of a comment ...
+const updateCommentPublication = async(idComment:string, item: Comment) => {
+    const responseItem = await CommentModel.findOne({_id: idComment},item,{new: true});
     return responseItem;
 };
 
-const updateUser = async(id: string, data: User) => {
-    const responseItem = await UserModel.findOneAndUpdate({_id: id}, data,{new: true});
-    return responseItem;
-};
-
-const deleteUser = async(id: string) => {
-    const responseItem = await UserModel.findOneAndRemove({_id: id});
+// (5) Delete comment ...
+const deleteCommentPublication = async(idComment: string) => {
+    const responseItem = await CommentModel.findOneAndRemove({_id: idComment});
     return responseItem;
 }
 
-
-export {insertUser, getUser, getUsers, updateUser, deleteUser};
+export {getCommentsPublication, postCommentPublication, postAnswerPublication, updateCommentPublication, deleteCommentPublication};

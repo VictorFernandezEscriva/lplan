@@ -1,5 +1,5 @@
 import { Request, Response, Router } from "express";
-import { deletePerson, getPerson, getPeople, postPerson, updatePerson } from "../controllers/user";
+import { getComments, postComment, postAnswer, updateComment, deleteComment } from "../controllers/comment";
 import { logMiddleware } from "../middleware/log";
 
 const router = Router(); //es el manejador de las rutas, las interpreta, con esto podremos crear los GET, POST ....

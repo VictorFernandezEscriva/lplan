@@ -1,12 +1,12 @@
 import { Request,Response } from "express";
-import { insertUser,getUsers,getUser,updateUser,deleteUser} from "../services/user";
 import { handleHttp } from "../utils/error.handle";
+import { getCommentsPublication, postCommentPublication, postAnswerPublication, updateCommentPublication, deleteCommentPublication } from "../services/comment";
 
 // (1) Get (obtain) comments ...
 const getComments=async({params}:Request,res:Response)=>{
     try{
         const {idPublication,numPage}=params;
-        const response=await getCommentsPublication(idPublication,numPage); // "numPage" nos sirve para el "paginate".
+        const response=await getCommentsPublication(idPublication, numPage); // "numPage" nos sirve para el "paginate".
         const data=response ? response:"NOT_FOUND";
         res.send(data);
     } catch(e){
