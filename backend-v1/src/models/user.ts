@@ -11,18 +11,22 @@ const UserSchema = new Schema<User>(
             type: String,
             required:true,
         },
+        mailUser:{
+            type: String,
+            required:true,
+            unique: true,
+        },
+        passwordUser:{
+            type: String,
+            required:true,
+        },
         photoUser:{
-            type: ImageBitmap,
+            type: String,
             required: true,
         },
         birthdateUser:{
             type: Schema.Types.Date,
             required:true,
-        },
-        mailUser:{
-            type: String,
-            required:true,
-            unique: true,
         },
         genderUser:{
             type: String,
@@ -33,10 +37,6 @@ const UserSchema = new Schema<User>(
             type: String,
             required:false,
         }, 
-        passwordUser:{
-            type: String,
-            required:true,
-        },
         descriptionUser:{
             type: String,
             requiered:true,

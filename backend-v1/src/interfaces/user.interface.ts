@@ -4,7 +4,7 @@ import { Auth } from "./auth.interface";
 export interface User extends Auth {
     nameUser: string;
     surnameUser: string;
-    photoUser: ImageBitmap;
+    photoUser: string;
     birthdateUser: Date;
     genderUser: "male" | "female";
     ocupationUser?: string;

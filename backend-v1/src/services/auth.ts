@@ -4,24 +4,24 @@ import { User } from "../interfaces/user.interface";
 import { encrypt, verified } from "../utils/bcrypt.handle";
 import { generateToken } from '../utils/jwt.handle';
 
-const registerNewUser = async ({ email, password, name, surname }: User) => {
-    const checkIs = await UserModel.findOne({ email });
+const registerNewUser = async ({ nameUser, surnameUser, passwordUser, mailUser, photoUser, birthdateUser, genderUser, ocupationUser, descriptionUser, roleUser, privacyUser }: User) => {
+    const checkIs = await UserModel.findOne({ mailUser });
     if (checkIs) return "ALREADY_USER";
-    const passHash = await encrypt(password); 
-    const registerNewUser = await UserModel.create({email, password: passHash, name, surname});
+    const passHash = await encrypt(passwordUser); 
+    const registerNewUser = await UserModel.create({nameUser, surnameUser, passwordUser: passHash, mailUser, photoUser, birthdateUser, genderUser, ocupationUser, descriptionUser, roleUser, privacyUser, deletedUser: true});
     return registerNewUser;
   };
 
-  const loginUser = async ({ email, password }: Auth) => {
-    const checkIs = await UserModel.findOne({ email });
+  const loginUser = async ({ mailUser, passwordUser }: Auth) => {
+    const checkIs = await UserModel.findOne({ mailUser });
     if (!checkIs) return "NOT_FOUND_USER";
   
-    const passwordHash = checkIs.password; 
-    const isCorrect = await verified(password, passwordHash);
+    const passwordHash = checkIs.passwordUser; 
+    const isCorrect = await verified(passwordUser, passwordHash);
   
     if (!isCorrect) return "PASSWORD_INCORRECT";
   
-    const token = generateToken(checkIs.email);
+    const token = generateToken(checkIs.mailUser, checkIs.roleUser);
     const data = {token, user: checkIs};
     return data;
   };
