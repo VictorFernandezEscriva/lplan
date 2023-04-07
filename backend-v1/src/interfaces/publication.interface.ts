@@ -4,5 +4,5 @@ export interface Publication extends Comment {
     idUserPublication: ObjectId,
     likesPublication?: ObjectId[],
     textPublication?: string,
-    photoPublication: string[]
+    photoPublication: string[] // Aquí van las fotos de las publicaciones.
 }

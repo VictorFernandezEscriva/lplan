@@ -19,7 +19,7 @@ const ActivitySchema = new Schema<Activity>(
             required: true,
         },
         photoActivity:{
-            type: String,
+            type: [Schema.Types.ObjectId],
             required:false,
         },
         dateActivity:{

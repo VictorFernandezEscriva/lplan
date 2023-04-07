@@ -10,7 +10,7 @@ const CommentSchema = new Schema<Comment>(
             required:true,
         },
         idPublicationComment:{
-            type: String,
+            type: Schema.Types.ObjectId,
             ref:'publications',
             required:true,
         },
@@ -27,11 +27,7 @@ const CommentSchema = new Schema<Comment>(
             type: [Schema.Types.ObjectId],
             ref:'comments',
             required:false,
-        },
-        dateComment:{
-            type: Schema.Types.Date,
-            required:true,
-        },
+        }
     },
     {
         timestamps: true,

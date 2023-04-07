@@ -4,8 +4,8 @@ export interface Activity {
     nameActivity: string;
     creatorActivity: ObjectId;
     participantsActivity?: ObjectId[];
-    photoActivity?: string; //Vector con todas las fotos que los usuarios hayan hecho en esa actividad.
-    dateActivity: Date;
+    photoActivity?: ObjectId[]; // PONER AQUÍ PUBLICACIONES.
+    dateActivity: Date; // FECHA EN LA QUE SE HACE (no poner fechas de creación que eso ya lo da mongo)
     hoursActivity: string[]; //Hora de inicio y hora de final. ***Intentar poner que tenga longitud 2***
     idLocation?: ObjectId; //Localización opcional para quien quiera ponerla 
     descriptionActivity?: string;

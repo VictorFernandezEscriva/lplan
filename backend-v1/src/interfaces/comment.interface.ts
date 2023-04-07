@@ -2,9 +2,9 @@ import { ObjectId } from "mongoose";
 
 export interface Comment{
     idUserComment: ObjectId,
-    idPublicationComment: string,
+    idPublicationComment: ObjectId,
     textComment: string,
     likesComment?: ObjectId[],
-    responseComment?: ObjectId[],
-    dateComment: Date
+    responseComment?: ObjectId[], // Comentar.
+    // dateComment: Date
 }
