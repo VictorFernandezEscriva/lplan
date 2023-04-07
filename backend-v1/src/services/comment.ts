@@ -30,7 +30,7 @@ const postAnswerPublication = async(idComment:string, item: Comment) => {
 
 // (4) Put (edition) of a comment ...
 const updateCommentPublication = async(idComment:string, item: Comment) => {
-    const responseItem = await CommentModel.findOne({_id: idComment},item,{new: true});
+    const responseItem = await CommentModel.updateOne({_id: idComment},item,{new: true});
     return responseItem;
 };
 
