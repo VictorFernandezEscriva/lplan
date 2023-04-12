@@ -1,8 +1,9 @@
 import { ObjectId } from "mongoose";
 
-export interface Publication extends Comment {
+export interface Publication {
     idUserPublication: ObjectId,
     likesPublication?: ObjectId[],
     textPublication?: string,
-    photoPublication: string[] // Aquí van las fotos de las publicaciones.
+    photoPublication: string[], // Aquí van las fotos de las publicaciones.
+    commentsPublication: ObjectId[]
 }

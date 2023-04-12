@@ -5,6 +5,6 @@ export interface Comment{
     idPublicationComment: ObjectId,
     textComment: string,
     likesComment?: ObjectId[],
-    responseComment?: ObjectId[], // Comentar.
-    // dateComment: Date
+    responseComment?: ObjectId[], 
+    dateComment: Date
 }
