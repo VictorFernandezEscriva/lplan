@@ -9,7 +9,7 @@ const getLoc=async({params}:Request,res:Response)=>{
         const data=response ? response:"NOT_FOUND";
         res.send(data);
     } catch(e){
-        handleHttp(res,"ERROR_GET_USER");
+        handleHttp(res,"ERROR_GET_LOCATION");
     }
 };
 
@@ -18,7 +18,7 @@ const getLocs=async(req:Request,res:Response)=>{
         const response=await getLocations();
         res.send(response);
     } catch(e){
-        handleHttp(res,"ERROR_GET_USERS");
+        handleHttp(res,"ERROR_GET_LOCATIONS");
     }
 };
 
@@ -28,7 +28,7 @@ const updateLoc=async ({params,body}:Request,res:Response)=>{
         const response=await updateLocation(idLocation,body);
         res.send(response);
     } catch(e){
-        handleHttp(res,"ERROR_UPDATE_USER");
+        handleHttp(res,"ERROR_UPDATE_LOCATION");
     }
 };
 
@@ -37,7 +37,7 @@ const postLoc=async ({body}:Request,res:Response)=>{
         const responsePerson=await insertLocation(body);
         res.send(responsePerson);
     }catch(e){
-        handleHttp(res,"ERROR_POST_USER");
+        handleHttp(res,"ERROR_POST_LOCATION");
     }
 };
 
