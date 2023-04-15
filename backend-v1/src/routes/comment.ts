@@ -1,5 +1,5 @@
 import { Request, Response, Router } from "express";
-import { getComments, postComment, postAnswer, updateComment, deleteComment, getAllAvailableComments } from "../controllers/comment";
+import { getComments, postComment, postAnswer, updateComment, deleteComment, getAllAvailableComments, getOneComment } from "../controllers/comment";
 import { logMiddleware } from "../middleware/log";
 
 const router = Router(); //es el manejador de las rutas, las interpreta, con esto podremos crear los GET, POST ....
@@ -25,5 +25,8 @@ router.delete("/deleteComment/:idComment", deleteComment);
 
 // (6) Get all comments
 router.get("/getAllComments", getAllAvailableComments);
+
+// (7) Get (obtain) comment ...
+router.get("/getComment/:idComment", getOneComment);
 
 export {router};

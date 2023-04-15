@@ -1,6 +1,6 @@
 import { Request,Response } from "express";
 import { handleHttp } from "../utils/error.handle";
-import { getCommentsPublication, postCommentPublication, postAnswerPublication, updateCommentPublication, deleteCommentPublication, getAllComments } from "../services/comment";
+import { getCommentsPublication, postCommentPublication, postAnswerPublication, updateCommentPublication, deleteCommentPublication, getAllComments, getComment } from "../services/comment";
 
 // (1) Get (obtain) comments ...
 const getComments=async({params}:Request,res:Response)=>{
@@ -62,7 +62,7 @@ const deleteComment=async ({params}:Request,res:Response)=>{
 // (6) Get all comments
 const getAllAvailableComments=async(req:Request,res:Response)=>{
     try{
-        const response=await getAllComments(); // "numPage" nos sirve para el "paginate".
+        const response=await getAllComments(); 
         const data=response ? response:"NOT_FOUND";
         res.send(data);
     } catch(e){
@@ -70,4 +70,16 @@ const getAllAvailableComments=async(req:Request,res:Response)=>{
     }
 };
 
-export{getComments,postComment,postAnswer,updateComment,deleteComment, getAllAvailableComments};
+// (7) Get (obtain) comment ...
+const getOneComment=async({params}:Request,res:Response)=>{
+    try{
+        const {idComment}=params;
+        const response=await getComment(idComment); 
+        const data=response ? response:"NOT_FOUND";
+        res.send(data);
+    } catch(e){
+        handleHttp(res,"ERROR_GET_THAT_COMMENT");
+    }
+};
+
+export{getComments,postComment,postAnswer,updateComment,deleteComment, getAllAvailableComments, getOneComment};

@@ -46,4 +46,10 @@ const getAllComments = async() => {
     return responseItem;
 };
 
-export {getCommentsPublication, postCommentPublication, postAnswerPublication, updateCommentPublication, deleteCommentPublication, getAllComments};
+// (7) Get (obtain) comment ...
+const getComment = async(idComment: string) => {
+    const responseItem = await CommentModel.find({_id: idComment })
+    return responseItem;
+};
+
+export {getCommentsPublication, postCommentPublication, postAnswerPublication, updateCommentPublication, deleteCommentPublication, getAllComments, getComment};
