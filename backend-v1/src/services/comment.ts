@@ -1,8 +1,7 @@
-//In charge to connect with the dB
-import { ObjectId } from "mongoose";
 import { Comment } from "../interfaces/comment.interface";
 import CommentModel from "../models/comment";
 import paginate from 'mongoose-paginate-v2';
+import PublicationModel from "../models/publication";
 
 
 
@@ -18,13 +17,14 @@ const getCommentsPublication = async(idPublication: string, numPage: string) => 
 // (2) Post (creation) of a comment of a publication ...
 const postCommentPublication = async(item: Comment) => {
     const responseInsert = await CommentModel.create(item);
-    return responseInsert;
+    const responseItem = await PublicationModel.findOneAndUpdate({ _id: item.idPublicationComment }, { $addToSet: { commentsPublication: responseInsert._id } },{new: true});
+    return responseItem;
 };
 
 // (3) Post (creation) of an answer to a comment ...
 const postAnswerPublication = async(idComment:string, item: Comment) => {
     const responseInsert = await CommentModel.create(item);
-    const responseItem = await CommentModel.findOne({ _id: idComment }, { $addToSet: { responseComment: responseInsert._id } },{new: true});
+    const responseItem = await CommentModel.findOneAndUpdate({ _id: idComment }, { $addToSet: { responseComment: responseInsert._id } },{new: true});
     return responseItem;
 };
 

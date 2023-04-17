@@ -1,12 +1,12 @@
 //In charge to connect with the dB
 import { ObjectId } from "mongoose";
-import { Comment } from "../interfaces/comment.interface";
-import CommentModel from "../models/comment";
 import paginate from 'mongoose-paginate-v2';
+import { Publication } from "../interfaces/publication.interface";
+import PublicationModel from "../models/publication";
 
 
 
-
+/*
 // (1) Get (obtain) comments ...
 const getCommentsPublication = async(idPublication: string, numPage: string) => {
     const comentariosPorPagina = 2;
@@ -14,13 +14,15 @@ const getCommentsPublication = async(idPublication: string, numPage: string) => 
     const responseItem = await CommentModel.find({ idPublicationComment:idPublication }).skip(salto).limit(comentariosPorPagina).exec();// Saltar los comentarios ya vistos// Limitar la cantidad de comentarios devueltos
     return responseItem;
 };
-
+*/
 // (2) Post (creation) of a comment of a publication ...
-const postCommentPublication = async(item: Comment) => {
-    const responseInsert = await CommentModel.create(item);
+const postOnePublication = async(item: Publication) => {
+    const responseInsert = await PublicationModel.create(item);
     return responseInsert;
 };
 
+
+/*
 // (3) Post (creation) of an answer to a comment ...
 const postAnswerPublication = async(idComment:string, item: Comment) => {
     const responseInsert = await CommentModel.create(item);
@@ -51,5 +53,5 @@ const getComment = async(idComment: string) => {
     const responseItem = await CommentModel.find({_id: idComment })
     return responseItem;
 };
-
-export {getCommentsPublication, postCommentPublication, postAnswerPublication, updateCommentPublication, deleteCommentPublication, getAllComments, getComment};
+*/
+export {postOnePublication};

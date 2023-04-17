@@ -1,6 +1,6 @@
 import { Request,Response } from "express";
 import { handleHttp } from "../utils/error.handle";
-import { getCommentsPublication, postCommentPublication, postAnswerPublication, updateCommentPublication, deleteCommentPublication, getAllComments, getComment } from "../services/comment";
+import { postOnePublication } from "../services/publication";
 
 /*
 // (1) Get (obtain) comments ...
@@ -14,18 +14,19 @@ const getComments=async({params}:Request,res:Response)=>{
         handleHttp(res,"ERROR_GET_COMMENTS");
     }
 };
+*/
 
-// (2) Post (creation) of a comment of a publication ...
-const postComment=async ({body}:Request,res:Response)=>{
+// (3) Post (creation) of a publication ...
+const postPublication=async ({body}:Request,res:Response)=>{
     try{
-        const response=await postCommentPublication(body);
+        const response=await postOnePublication(body);
         const data=response ? response:"NOT_FOUND";
         res.send(data);
     }catch(e){
-        handleHttp(res,"ERROR_POST_COMMENT");
+        handleHttp(res,"ERROR_POST_PUBLICATION");
     }
 };
-
+/*
 // (3) Post (creation) of an answer to a comment ...
 const postAnswer=async ({params,body}:Request,res:Response)=>{
     try{
@@ -82,6 +83,5 @@ const getOneComment=async({params}:Request,res:Response)=>{
         handleHttp(res,"ERROR_GET_THAT_COMMENT");
     }
 };
-
-export{getComments,postComment,postAnswer,updateComment,deleteComment, getAllAvailableComments, getOneComment};
 */
+export{postPublication};

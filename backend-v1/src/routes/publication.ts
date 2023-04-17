@@ -1,5 +1,6 @@
 import { Request, Response, Router } from "express";
 import { logMiddleware } from "../middleware/log";
+import { postPublication } from "../controllers/publication";
 
 const router = Router(); //es el manejador de las rutas, las interpreta, con esto podremos crear los GET, POST ....
 
@@ -10,12 +11,15 @@ const router = Router(); //es el manejador de las rutas, las interpreta, con est
 // (1) Get (obtain) publications...
 router.get("/getPublications/:idPublication/:numPage", getPaginatePublications);
 
+
 // (2) Get (obtain) a publication...
 router.get("/getPublication/:idPublication", getPublication);
+*/
 
-// (3) Post (creation) of a comment of a publication ...
-router.post("/createComment",postComment);
+// (3) Post (creation) of a publication ...
+router.post("/createPublication",postPublication);
 
+/*
 // (4) Post (creation) of an answer to a comment ...
 router.post("/createComment/:idComment",postAnswer);
 

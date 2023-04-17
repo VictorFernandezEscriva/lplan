@@ -5,5 +5,5 @@ export interface Publication {
     likesPublication?: ObjectId[],
     textPublication?: string,
     photoPublication: string[], // Aquí van las fotos de las publicaciones.
-    commentsPublication: ObjectId[]
+    commentsPublication?: ObjectId[]
 }

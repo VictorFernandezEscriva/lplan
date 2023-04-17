@@ -12,7 +12,7 @@ const CommentSchema = new Schema<Comment>(
         idPublicationComment:{
             type: Schema.Types.ObjectId,
             ref:'publications',
-            required:true,
+            required:false,
         },
         textComment:{
             type: String,
