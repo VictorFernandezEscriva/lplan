@@ -43,8 +43,8 @@ const postLoc=async ({body}:Request,res:Response)=>{
 
 const deleteLoc=async ({params}:Request,res:Response)=>{
     try{
-        const {idUser}=params;
-        const response=await deleteLocation(idUser);
+        const {idLocation}=params;
+        const response=await deleteLocation(idLocation);
         res.send(response);
     } catch(e){
         handleHttp(res,"ERROR_DELETE_USER");
