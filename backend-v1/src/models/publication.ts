@@ -11,7 +11,7 @@ const PublicationSchema = new Schema<Publication>(
         likesPublication:{
             type:[Schema.Types.ObjectId],
             ref: 'users',
-            required:true,
+            required:false,
         },
         textPublication:{
             type:String,

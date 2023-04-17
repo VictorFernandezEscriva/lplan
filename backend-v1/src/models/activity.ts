@@ -18,7 +18,7 @@ const ActivitySchema = new Schema<Activity>(
             ref: 'users',
             required: true,
         },
-        photoActivity:{
+        publicationActivity:{
             type: [Schema.Types.ObjectId],
             required:false,
         },
