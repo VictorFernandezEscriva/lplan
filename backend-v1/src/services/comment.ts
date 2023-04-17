@@ -48,7 +48,7 @@ const getAllComments = async() => {
 
 // (7) Get (obtain) comment ...
 const getComment = async(idComment: string) => {
-    const responseItem = await CommentModel.find({_id: idComment })
+    const responseItem = await CommentModel.findOne({_id: idComment })
     return responseItem;
 };
 
