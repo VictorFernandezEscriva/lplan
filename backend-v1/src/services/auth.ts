@@ -12,9 +12,12 @@ const registerNewUser = async ({ appUser, nameUser, surnameUser, passwordUser, m
     return registerNewUser;
   };
 
-const loginUser = async ({ mailUser, passwordUser }: Auth) => {
-    const checkIs = await UserModel.findOne({ mailUser });
-    if (!checkIs) return "NOT_FOUND_USER";
+const loginUser = async (body: Auth) => {
+    const { mailUser, passwordUser } = body;
+
+    const checkIs = await UserModel.findOne({ mailUser: mailUser });
+    if (!checkIs) return 'NOT_FOUND_USER';
+    // if (!checkIs) return { error: 'NOT_FOUND_USER' };
   
     const passwordHash = checkIs.passwordUser; 
     const isCorrect = await verified(passwordUser, passwordHash);

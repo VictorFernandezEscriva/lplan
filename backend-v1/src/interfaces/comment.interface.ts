@@ -6,5 +6,4 @@ export interface Comment{
     textComment: string,
     likesComment?: ObjectId[],
     responseComment?: ObjectId[], 
-    dateComment: Date
 }

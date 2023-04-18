@@ -1,20 +1,31 @@
 import { Request,Response } from "express";
 import { handleHttp } from "../utils/error.handle";
-import { postOnePublication } from "../services/publication";
+import { postOnePublication, getAllPublications, getNumPublications, getPublication, updateOnePublication, deleteOnePublication } from "../services/publication";
 
-/*
+
 // (1) Get (obtain) comments ...
-const getComments=async({params}:Request,res:Response)=>{
+const getPaginatePublications=async({params}:Request,res:Response)=>{
     try{
-        const {idPublication,numPage}=params;
-        const response=await getCommentsPublication(idPublication, numPage); // "numPage" nos sirve para el "paginate".
+        const {numPage}=params;
+        const response=await getNumPublications(numPage); // "numPage" nos sirve para el "paginate".
         const data=response ? response:"NOT_FOUND";
         res.send(data);
     } catch(e){
-        handleHttp(res,"ERROR_GET_COMMENTS");
+        handleHttp(res,"ERROR_GET_PAGINATED_PUBLICATIONS");
     }
 };
-*/
+
+// (2) Get (obtain) Publication ...
+const getOnePublication=async({params}:Request,res:Response)=>{
+    try{
+        const {idPublication}=params;
+        const response=await getPublication(idPublication); 
+        const data=response ? response:"NOT_FOUND";
+        res.send(data);
+    } catch(e){
+        handleHttp(res,"ERROR_GET_THAT_PUBLICATION");
+    }
+};
 
 // (3) Post (creation) of a publication ...
 const postPublication=async ({body}:Request,res:Response)=>{
@@ -26,62 +37,40 @@ const postPublication=async ({body}:Request,res:Response)=>{
         handleHttp(res,"ERROR_POST_PUBLICATION");
     }
 };
-/*
-// (3) Post (creation) of an answer to a comment ...
-const postAnswer=async ({params,body}:Request,res:Response)=>{
-    try{
-        const {idComment}=params;
-        const response=await postAnswerPublication(idComment,body);
-        const data=response ? response:"NOT_FOUND";
-        res.send(data);
-    }catch(e){
-        handleHttp(res,"ERROR_POST_ANSWER");
-    }
-};
 
-// (4) Put (edition) of a comment ...
-const updateComment=async ({params,body}:Request,res:Response)=>{
+// (4) Put (edition) of a publication ...
+const updatePublication=async ({params,body}:Request,res:Response)=>{
     try{
-        const {idComment}=params;
-        const response=await updateCommentPublication(idComment,body);
+        const {idPublication}=params;
+        const response=await updateOnePublication(idPublication,body);
         res.send(response);
     } catch(e){
-        handleHttp(res,"ERROR_UPDATE_COMMENT");
+        handleHttp(res,"ERROR_UPDATE_PUBLICATION");
     }
 };
 
 // (5) Delete comment ...
-const deleteComment=async ({params}:Request,res:Response)=>{
+const deletePublication=async ({params}:Request,res:Response)=>{
     try{
-        const {idComment}=params;
-        const response=await deleteCommentPublication(idComment);
+        const {idPublication}=params;
+        const response=await deleteOnePublication(idPublication);
         res.send(response);
     } catch(e){
-        handleHttp(res,"ERROR_DELETE_COMMENT");
+        handleHttp(res,"ERROR_DELETE_PUBLICATION");
     }
 };
 
-// (6) Get all comments
-const getAllAvailableComments=async(req:Request,res:Response)=>{
+// (6) Get all publications
+const getAllAvailablePublications=async(req:Request,res:Response)=>{
     try{
-        const response=await getAllComments(); 
+        const response=await getAllPublications(); 
         const data=response ? response:"NOT_FOUND";
         res.send(data);
     } catch(e){
-        handleHttp(res,"ERROR_GET_ALL_COMMENTS");
+        handleHttp(res,"ERROR_GET_ALL_PUBLICATIONS");
     }
 };
 
-// (7) Get (obtain) comment ...
-const getOneComment=async({params}:Request,res:Response)=>{
-    try{
-        const {idComment}=params;
-        const response=await getComment(idComment); 
-        const data=response ? response:"NOT_FOUND";
-        res.send(data);
-    } catch(e){
-        handleHttp(res,"ERROR_GET_THAT_COMMENT");
-    }
-};
-*/
-export{postPublication};
+
+
+export{postPublication, getPaginatePublications, getAllAvailablePublications, getOnePublication, updatePublication, deletePublication};
