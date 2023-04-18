@@ -17,7 +17,7 @@ const getNumPublications = async(numPage: string) => {
 
 // (2) Get (obtain) Publication ...
 const getPublication = async(idPublication: string) => {
-    const responseItem = await PublicationModel.find({_id: idPublication })
+    const responseItem = await PublicationModel.findOne({_id: idPublication })
     return responseItem;
 };
 
