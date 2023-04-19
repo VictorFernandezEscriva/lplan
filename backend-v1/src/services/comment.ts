@@ -52,4 +52,10 @@ const getComment = async(idComment: string) => {
     return responseItem;
 };
 
-export {getCommentsPublication, postCommentPublication, postAnswerPublication, updateCommentPublication, deleteCommentPublication, getAllComments, getComment};
+// (8) Put (edition) user le da like a un comment ...
+const updateLikes = async(idComment:string, idUser:string) => {
+    const responseItem = await CommentModel.findOneAndUpdate({_id: idComment}, { $addToSet: { likesComment: idUser } } ,{new: true});
+    return responseItem;
+};
+
+export {getCommentsPublication, postCommentPublication, postAnswerPublication, updateCommentPublication, deleteCommentPublication, getAllComments, getComment, updateLikes};

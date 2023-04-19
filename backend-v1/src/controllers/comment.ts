@@ -1,6 +1,6 @@
 import { Request,Response } from "express";
 import { handleHttp } from "../utils/error.handle";
-import { getCommentsPublication, postCommentPublication, postAnswerPublication, updateCommentPublication, deleteCommentPublication, getAllComments, getComment } from "../services/comment";
+import { getCommentsPublication, postCommentPublication, postAnswerPublication, updateCommentPublication, deleteCommentPublication, getAllComments, getComment, updateLikes } from "../services/comment";
 
 // (1) Get (obtain) comments ...
 const getComments=async({params}:Request,res:Response)=>{
@@ -82,4 +82,15 @@ const getOneComment=async({params}:Request,res:Response)=>{
     }
 };
 
-export{getComments,postComment,postAnswer,updateComment,deleteComment, getAllAvailableComments, getOneComment};
+// (8) Put (edition) user le da like a un comment ...
+const updateLikesComment=async ({params}:Request,res:Response)=>{
+    try{
+        const {idComment, idUser}=params;
+        const response=await updateLikes(idComment, idUser);
+        res.send(response);
+    } catch(e){
+        handleHttp(res,"ERROR_UPDATE_LIKES");
+    }
+};
+
+export{getComments,postComment,postAnswer,updateComment,deleteComment, getAllAvailableComments, getOneComment, updateLikesComment};
