@@ -43,18 +43,5 @@
     />
   </div>
 
-  <div class="form-group">
-    <label for="dateComment">Fecha</label>
-    <input
-      type="date"
-      class="form-control"
-      id="dateComment"
-      name="dateComment"
-      [(ngModel)]="commentData.dateComment"
-      required
-      readonly
-    />
-  </div>
-
   <button class="btn btn-primary" (click)="openModal()">Guardar cambios</button>
 </form>
