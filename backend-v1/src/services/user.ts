@@ -1,4 +1,5 @@
 //In charge to connect with the dB
+import { Types } from "mongoose";
 import { User } from "../interfaces/user.interface";
 import UserModel from "../models/user";
 
@@ -27,5 +28,39 @@ const deleteUser = async(id: string) => {
     return responseItem;
 }
 
+const getAllFollowers = async (userId: string) => {
+    
+    const follower=await UserModel.findById(userId).populate('followersUser');
+    if(!userId){
+        throw new Error(`User with ID ${userId} not found`);
+    }
+    return follower?.followersUser;
+  };
+  
+  const getAllFollowed = async (userId: string) => {
+    const followed = await UserModel.findById(userId).populate('followedUser');
+    if (!userId) {
+      throw new Error('User not found');
+    }
+    return followed?.followedUser;
+  };
+  const addFollower = async (idUser: string, idFollower: string) => {
+    const responseItem=await UserModel.findOneAndUpdate(
+        {_id:idUser},
+        {$addToSet:{followersUser:new Types.ObjectId(idFollower)}},
+        {new:true}
+    ).populate('followersUser');
+    console.log(responseItem);
+    return responseItem;
+  };
 
-export {insertUser, getUser, getUsers, updateUser, deleteUser};
+  const addFollowed = async (idUser: string, idFollower: string) => {
+    const responseItem=await UserModel.findOneAndUpdate(
+        {_id:idUser},
+        {$addToSet:{followedUser:new Types.ObjectId(idFollower)}},
+        {new:true}
+    ).populate('followedUser');
+    console.log(responseItem);
+    return responseItem;
+    };
+export {insertUser, getUser, getUsers, updateUser, deleteUser, getAllFollowed, getAllFollowers,addFollower,addFollowed};
