@@ -15,6 +15,7 @@ const getLocations = async( numPage: string) => {
     const localizacionesPorPagina = 3;
     const salto = (parseInt(numPage,10) - 1) * localizacionesPorPagina;
     const responseItem = await LocationModel.find().skip(salto).limit(localizacionesPorPagina).exec();//Saltar las localizaciones ya vistas, presentar las de su pagina correspondiente
+
     return responseItem;
 };
 

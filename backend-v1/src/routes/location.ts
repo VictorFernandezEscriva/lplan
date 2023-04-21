@@ -8,7 +8,7 @@ const router = Router(); //es el manejador de las rutas, las interpreta, con est
  * http://localhost:3002/items [GET]
  */
 router.get("/all", logMiddleware, getAllLocs);
-router.get("all/:numPage",getLocs)
+router.get("/all/:numPage",getLocs)
 router.get("/:idLocation", getLoc);
 router.post("/",postLoc);
 router.put("/:idLocation",updateLoc);
