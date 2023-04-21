@@ -12,6 +12,7 @@ const getNumPublications = async(numPage: string) => {
     const publicacionesPorPagina = 3;
     const salto = (parseInt(numPage) - 1) * publicacionesPorPagina;
     const responseItem = await PublicationModel.find().skip(salto).limit(publicacionesPorPagina).exec();// Saltar los comentarios ya vistos// Limitar la cantidad de comentarios devueltos
+  
     return responseItem;
 };
 

@@ -1,5 +1,5 @@
 import { Request,Response } from "express";
-import { insertLocation, getLocation, getLocations, updateLocation, deleteLocation} from "../services/location";
+import { insertLocation, getLocation, getLocations, updateLocation, deleteLocation,getAllLocations} from "../services/location";
 import { handleHttp } from "../utils/error.handle";
 
 const getLoc=async({params}:Request,res:Response)=>{
@@ -13,14 +13,24 @@ const getLoc=async({params}:Request,res:Response)=>{
     }
 };
 
-const getLocs=async(req:Request,res:Response)=>{
+const getAllLocs=async(req:Request,res:Response)=>{
     try{
-        const response=await getLocations();
+        const response=await getAllLocations();
         res.send(response);
     } catch(e){
         handleHttp(res,"ERROR_GET_LOCATIONS");
     }
 };
+const getLocs=async({params}:Request,res:Response)=>{
+    try{
+        const {numPage}=params
+        const response=await getLocations(numPage);
+        res.send(response);
+    } catch(e){
+        handleHttp(res,"ERROR_GET_LOCATIONS");
+    }
+};
+
 
 const updateLoc=async ({params,body}:Request,res:Response)=>{
     try{
@@ -51,4 +61,4 @@ const deleteLoc=async ({params}:Request,res:Response)=>{
     }
 };
 
-export{getLoc,getLocs,updateLoc,postLoc,deleteLoc};
+export{getLoc,getAllLocs,updateLoc,postLoc,deleteLoc,getLocs};

@@ -1,5 +1,5 @@
 import { Request, Response, Router } from "express";
-import { getLoc,getLocs,updateLoc,postLoc,deleteLoc } from "../controllers/location";
+import { getLoc,getAllLocs,updateLoc,postLoc,deleteLoc,getLocs } from "../controllers/location";
 import { logMiddleware } from "../middleware/log";
 
 const router = Router(); //es el manejador de las rutas, las interpreta, con esto podremos crear los GET, POST ....
@@ -7,7 +7,8 @@ const router = Router(); //es el manejador de las rutas, las interpreta, con est
 /**
  * http://localhost:3002/items [GET]
  */
-router.get("/all", logMiddleware, getLocs);
+router.get("/all", logMiddleware, getAllLocs);
+router.get("/all/:numPage",getLocs)
 router.get("/:idLocation", getLoc);
 router.post("/",postLoc);
 router.put("/:idLocation",updateLoc);
