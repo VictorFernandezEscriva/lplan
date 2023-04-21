@@ -1,6 +1,6 @@
 import { Request,Response } from "express";
 import { handleHttp } from "../utils/error.handle";
-import { postOnePublication, getAllPublications, getNumPublications, getPublication, updateOnePublication, deleteOnePublication } from "../services/publication";
+import { postOnePublication, getAllPublications, getNumPublications, getPublication, updateOnePublication, deleteOnePublication, updateLikes } from "../services/publication";
 
 
 // (1) Get (obtain) comments ...
@@ -71,6 +71,15 @@ const getAllAvailablePublications=async(req:Request,res:Response)=>{
     }
 };
 
+// (7) Put (edition) user le da like a una publication ...
+const updateLikesPublication=async ({params}:Request,res:Response)=>{
+    try{
+        const {idPublication, idUser}=params;
+        const response=await updateLikes(idPublication,idUser);
+        res.send(response);
+    } catch(e){
+        handleHttp(res,"ERROR_UPDATE_LIKES");
+    }
+};
 
-
-export{postPublication, getPaginatePublications, getAllAvailablePublications, getOnePublication, updatePublication, deletePublication};
+export{postPublication, getPaginatePublications, getAllAvailablePublications, getOnePublication, updatePublication, deletePublication, updateLikesPublication};

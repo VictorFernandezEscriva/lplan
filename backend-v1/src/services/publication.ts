@@ -46,6 +46,10 @@ const getAllPublications = async() => {
     return responseItem;
 };
 
+// (7) Put (edition) user le da like a una publication ...
+const updateLikes = async(idPublication:string, idUser:string) => {
+    const responseItem = await PublicationModel.findOneAndUpdate({_id: idPublication}, { $addToSet: { likesPublication: idUser } } ,{new: true});
+    return responseItem;
+};
 
-
-export {getNumPublications, postOnePublication, getAllPublications, getPublication, updateOnePublication, deleteOnePublication};
+export {getNumPublications, postOnePublication, getAllPublications, getPublication, updateOnePublication, deleteOnePublication, updateLikes};
