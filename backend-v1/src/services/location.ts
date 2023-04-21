@@ -6,10 +6,18 @@ const insertLocation = async(item: Location) => {
     return responseInsert;
 };
 
-const getLocations = async() => {
+const getAllLocations = async() => {
     const responseItem = await LocationModel.find({});
     return responseItem;
 };
+
+const getLocations = async( numPage: string) => {
+    const localizacionesPorPagina = 3;
+    const salto = (parseInt(numPage,10) - 1) * localizacionesPorPagina;
+    const responseItem = await LocationModel.find().skip(salto).limit(localizacionesPorPagina).exec();//Saltar las localizaciones ya vistas, presentar las de su pagina correspondiente
+    return responseItem;
+};
+
 
 const getLocation = async(id: string) => {
     const responseItem = await LocationModel.findOne({_id: id});
@@ -27,4 +35,4 @@ const deleteLocation = async(id: string) => {
 }
 
 
-export {insertLocation, getLocation, getLocations, updateLocation, deleteLocation};
+export {insertLocation, getLocation, getLocations, updateLocation, deleteLocation,getAllLocations};
