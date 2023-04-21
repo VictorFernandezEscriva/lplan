@@ -1,5 +1,5 @@
 import { Request, Response, Router } from "express";
-import { getComments, postComment, postAnswer, updateComment, deleteComment, getAllAvailableComments, getOneComment } from "../controllers/comment";
+import { getComments, postComment, postAnswer, updateComment, deleteComment, getAllAvailableComments, getOneComment, updateLikesComment } from "../controllers/comment";
 import { logMiddleware } from "../middleware/log";
 
 const router = Router(); //es el manejador de las rutas, las interpreta, con esto podremos crear los GET, POST ....
@@ -28,5 +28,8 @@ router.get("/getAllComments", getAllAvailableComments);
 
 // (7) Get (obtain) comment ...
 router.get("/getComment/:idComment", getOneComment);
+
+// (8) Put (edition) user le da like a un comment ...
+router.put("/updateLikesComment/:idComment/:idUser", updateLikesComment);
 
 export {router};

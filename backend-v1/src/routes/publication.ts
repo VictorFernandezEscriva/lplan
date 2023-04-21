@@ -1,6 +1,6 @@
 import { Request, Response, Router } from "express";
 import { logMiddleware } from "../middleware/log";
-import { getPaginatePublications, postPublication, getAllAvailablePublications, getOnePublication, updatePublication, deletePublication } from "../controllers/publication";
+import { getPaginatePublications, postPublication, getAllAvailablePublications, getOnePublication, updatePublication, deletePublication, updateLikesPublication } from "../controllers/publication";
 
 const router = Router(); //es el manejador de las rutas, las interpreta, con esto podremos crear los GET, POST ....
 
@@ -26,5 +26,7 @@ router.delete("/deletePublication/:idPublication", deletePublication);
 // (6) Get all publications
 router.get("/getAllPublications", getAllAvailablePublications);
 
+// (7) Put (edition) user le da like a una publication ...
+router.put("/updateLikesPublication/:idPublication/:idUser", updateLikesPublication);
 
 export {router};
