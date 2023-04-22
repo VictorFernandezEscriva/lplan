@@ -1,4 +1,5 @@
 //In charge to connect with the dB
+import { Types } from "mongoose";
 import { User } from "../interfaces/user.interface";
 import UserModel from "../models/user";
 
@@ -28,4 +29,66 @@ const deleteUser = async(id: string) => {
 }
 
 
-export {insertUser, getUser, getUsers, updateUser, deleteUser};
+const getAllFollowers = async (userId: string) => {
+    
+    const follower=await UserModel.findById(userId).populate('followersUser');
+    if(!userId){
+        throw new Error(`User with ID ${userId} not found`);
+    }
+    return follower?.followersUser;
+  };
+  
+  const getAllFollowed = async (userId: string) => {
+    const followed = await UserModel.findById(userId).populate('followedUser');
+    if (!userId) {
+      throw new Error('User not found');
+    }
+    return followed?.followedUser;
+  };
+  const addFollower = async (idUser: string, idFollower: string) => {
+    const responseItem=await UserModel.findOneAndUpdate(
+        {_id:idUser},
+        {$addToSet:{followersUser:new Types.ObjectId(idFollower)}},
+        {new:true}
+    ).populate('followersUser');
+    console.log(responseItem);
+    return responseItem;
+  };
+
+
+
+  const addFollowed = async (idUser: string, idFollower: string) => {
+    const responseItem=await UserModel.findOneAndUpdate(
+        {_id:idUser},
+        {$addToSet:{followedUser:new Types.ObjectId(idFollower)}},
+        {new:true}
+    ).populate('followedUser');
+    console.log(responseItem);
+    return responseItem;
+    };
+
+    const removeFollowed = async (idUser: string, idFollowed: string) => {
+        const responseItem = await UserModel.findOneAndUpdate(
+          {_id: idUser},
+          {$pull: {followedUser: new Types.ObjectId(idFollowed)}},
+          {new: true}
+        ).populate('followedUser');
+        if (!responseItem) {
+          throw new Error('User not found');
+        }
+        return responseItem;
+      };
+      const removeFollower = async (idUser: string, idFollower: string) => {
+        const responseItem = await UserModel.findOneAndUpdate(
+          {_id: idUser},
+          {$pull: {followersUser: new Types.ObjectId(idFollower)}},
+          {new: true}
+        ).populate('followersUser');
+        console.log(responseItem);
+        if (!responseItem) {
+          throw new Error('User not found');
+        }
+        
+        return responseItem;
+      };
+export {insertUser, getUser, getUsers, updateUser, deleteUser, getAllFollowed, getAllFollowers,addFollower,addFollowed,removeFollowed,removeFollower};

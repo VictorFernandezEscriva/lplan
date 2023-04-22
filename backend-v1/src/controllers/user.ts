@@ -1,5 +1,5 @@
 import { Request,Response } from "express";
-import { insertUser,getUsers,getUser,updateUser,deleteUser} from "../services/user";
+import { insertUser,getUsers,getUser,updateUser,deleteUser, getAllFollowed, getAllFollowers, addFollowed,addFollower,removeFollowed,removeFollower} from "../services/user";
 import { handleHttp } from "../utils/error.handle";
 
 const getPerson=async({params}:Request,res:Response)=>{
@@ -51,4 +51,74 @@ const deletePerson=async ({params}:Request,res:Response)=>{
     }
 };
 
-export{getPerson,getPeople,postPerson,updatePerson,deletePerson};
+
+
+const getFollowersCtrl = async (req: Request, res: Response) => {
+    const { userId } = req.params;
+    console.log(userId);
+
+    try {
+      const users = await getAllFollowers(userId);
+      return res.status(200).json(users);
+    } catch (err) {
+      console.error(err);
+      return res.status(500).json({ message: "Server error" });
+    }
+  };
+  
+  const getFollowedCtrl = async (req: Request, res: Response) => {
+    const { userId } = req.params;
+    console.log(userId);
+    try {
+      const users = await getAllFollowed(userId);
+      return res.status(200).json(users);
+    } catch (err) {
+      console.error(err);
+      return res.status(500).json({ message: "Server error" });
+    }
+  };
+
+  const follower = async ({body}:Request,res:Response) => {
+    try{
+        const{idUser,idFollower}=body;
+        console.log(body);
+        const response=await addFollower(idUser,idFollower);
+        res.send(response);
+    } catch(e){
+        handleHttp(res,"ERROR_AL_AÑADIR");
+    }
+  };
+
+  
+  const followed = async ({body}:Request,res:Response) => {
+    try{
+        const{idUser,idFollowed}=body;
+        console.log(body);
+        const response=await addFollowed(idUser,idFollowed);
+        res.send(response);
+    } catch(e){
+        handleHttp(res,"ERROR_AL_AÑADIR");
+    }
+  };
+
+  const removeFollowedCtrl = async (req:Request,res:Response) => {
+    try{
+        const { idUser, idFollowed } = req.params;
+        const response=await removeFollowed(idUser,idFollowed);
+        res.send(response);
+    } catch(e){
+        handleHttp(res,"ERROR_AL_ELIMINAR");
+    }
+  };
+  const removeFollowerCtrl = async (req:Request,res:Response) => {
+    try {
+        const { idUser, idFollower } = req.params;
+        const response = await removeFollower(idUser, idFollower);
+        res.send(response);
+        console.log(response);
+      } catch (e) {
+        handleHttp(res, 'ERROR_DELETE_FOLLOWER');
+      }
+  };
+
+export{getPerson,getPeople,postPerson,updatePerson,deletePerson,getFollowersCtrl,getFollowedCtrl,follower,followed,removeFollowerCtrl,removeFollowedCtrl};
