@@ -58,4 +58,12 @@ const updateLikes = async(idComment:string, idUser:string) => {
     return responseItem;
 };
 
-export {getCommentsPublication, postCommentPublication, postAnswerPublication, updateCommentPublication, deleteCommentPublication, getAllComments, getComment, updateLikes};
+// (9) Get all paginated comments
+const getAllPaginatedComments = async(numPage: string) => {
+    const comentariosPorPagina = 2;
+    const salto = (parseInt(numPage) - 1) * comentariosPorPagina;
+    const responseItem = await CommentModel.find({ }).skip(salto).limit(comentariosPorPagina).exec();
+    return responseItem;
+};
+
+export {getCommentsPublication, postCommentPublication, postAnswerPublication, updateCommentPublication, deleteCommentPublication, getAllComments, getComment, updateLikes, getAllPaginatedComments};

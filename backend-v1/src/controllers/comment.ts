@@ -1,6 +1,6 @@
 import { Request,Response } from "express";
 import { handleHttp } from "../utils/error.handle";
-import { getCommentsPublication, postCommentPublication, postAnswerPublication, updateCommentPublication, deleteCommentPublication, getAllComments, getComment, updateLikes } from "../services/comment";
+import { getCommentsPublication, postCommentPublication, postAnswerPublication, updateCommentPublication, deleteCommentPublication, getAllComments, getComment, updateLikes, getAllPaginatedComments } from "../services/comment";
 
 // (1) Get (obtain) comments ...
 const getComments=async({params}:Request,res:Response)=>{
@@ -93,4 +93,16 @@ const updateLikesComment=async ({params}:Request,res:Response)=>{
     }
 };
 
-export{getComments,postComment,postAnswer,updateComment,deleteComment, getAllAvailableComments, getOneComment, updateLikesComment};
+// (9) Get all paginated comments
+const getAllPaginatedCommentsController=async({params}:Request,res:Response)=>{
+    try{
+        const {numPage}=params;
+        const response=await getAllPaginatedComments(numPage); 
+        const data=response ? response:"NOT_FOUND";
+        res.send(data);
+    } catch(e){
+        handleHttp(res,"ERROR_GET_ALL_PAGINATED_COMMENTS");
+    }
+};
+
+export{getComments,postComment,postAnswer,updateComment,deleteComment, getAllAvailableComments, getOneComment, updateLikesComment, getAllPaginatedCommentsController};
