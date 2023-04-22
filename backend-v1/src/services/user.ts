@@ -28,6 +28,7 @@ const deleteUser = async(id: string) => {
     return responseItem;
 }
 
+
 const getAllFollowers = async (userId: string) => {
     
     const follower=await UserModel.findById(userId).populate('followersUser');
@@ -54,6 +55,8 @@ const getAllFollowers = async (userId: string) => {
     return responseItem;
   };
 
+
+
   const addFollowed = async (idUser: string, idFollower: string) => {
     const responseItem=await UserModel.findOneAndUpdate(
         {_id:idUser},
@@ -63,4 +66,29 @@ const getAllFollowers = async (userId: string) => {
     console.log(responseItem);
     return responseItem;
     };
-export {insertUser, getUser, getUsers, updateUser, deleteUser, getAllFollowed, getAllFollowers,addFollower,addFollowed};
+
+    const removeFollowed = async (idUser: string, idFollowed: string) => {
+        const responseItem = await UserModel.findOneAndUpdate(
+          {_id: idUser},
+          {$pull: {followedUser: new Types.ObjectId(idFollowed)}},
+          {new: true}
+        ).populate('followedUser');
+        if (!responseItem) {
+          throw new Error('User not found');
+        }
+        return responseItem;
+      };
+      const removeFollower = async (idUser: string, idFollower: string) => {
+        const responseItem = await UserModel.findOneAndUpdate(
+          {_id: idUser},
+          {$pull: {followersUser: new Types.ObjectId(idFollower)}},
+          {new: true}
+        ).populate('followersUser');
+        console.log(responseItem);
+        if (!responseItem) {
+          throw new Error('User not found');
+        }
+        
+        return responseItem;
+      };
+export {insertUser, getUser, getUsers, updateUser, deleteUser, getAllFollowed, getAllFollowers,addFollower,addFollowed,removeFollowed,removeFollower};

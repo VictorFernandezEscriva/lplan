@@ -1,5 +1,5 @@
 import { Request,Response } from "express";
-import { insertUser,getUsers,getUser,updateUser,deleteUser, getAllFollowed, getAllFollowers, addFollowed,addFollower} from "../services/user";
+import { insertUser,getUsers,getUser,updateUser,deleteUser, getAllFollowed, getAllFollowers, addFollowed,addFollower,removeFollowed,removeFollower} from "../services/user";
 import { handleHttp } from "../utils/error.handle";
 
 const getPerson=async({params}:Request,res:Response)=>{
@@ -51,6 +51,8 @@ const deletePerson=async ({params}:Request,res:Response)=>{
     }
 };
 
+
+
 const getFollowersCtrl = async (req: Request, res: Response) => {
     const { userId } = req.params;
     console.log(userId);
@@ -86,6 +88,7 @@ const getFollowersCtrl = async (req: Request, res: Response) => {
         handleHttp(res,"ERROR_AL_AÑADIR");
     }
   };
+
   
   const followed = async ({body}:Request,res:Response) => {
     try{
@@ -98,4 +101,24 @@ const getFollowersCtrl = async (req: Request, res: Response) => {
     }
   };
 
-export{getPerson,getPeople,postPerson,updatePerson,deletePerson,getFollowersCtrl,getFollowedCtrl,follower,followed};
+  const removeFollowedCtrl = async (req:Request,res:Response) => {
+    try{
+        const { idUser, idFollowed } = req.params;
+        const response=await removeFollowed(idUser,idFollowed);
+        res.send(response);
+    } catch(e){
+        handleHttp(res,"ERROR_AL_ELIMINAR");
+    }
+  };
+  const removeFollowerCtrl = async (req:Request,res:Response) => {
+    try {
+        const { idUser, idFollower } = req.params;
+        const response = await removeFollower(idUser, idFollower);
+        res.send(response);
+        console.log(response);
+      } catch (e) {
+        handleHttp(res, 'ERROR_DELETE_FOLLOWER');
+      }
+  };
+
+export{getPerson,getPeople,postPerson,updatePerson,deletePerson,getFollowersCtrl,getFollowedCtrl,follower,followed,removeFollowerCtrl,removeFollowedCtrl};
