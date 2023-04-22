@@ -1,5 +1,5 @@
 import { Request,Response } from "express";
-import { insertUser,getUsers,getUser,updateUser,deleteUser, getAllFollowed, getAllFollowers, addFollowed,addFollower,removeFollowed,removeFollower} from "../services/user";
+import { insertUser,getUsers,getUser,updateUser,deleteUser, getAllFollowed, getAllFollowers, addFollowed,addFollower,removeFollowed,removeFollower, getUsersPag} from "../services/user";
 import { handleHttp } from "../utils/error.handle";
 
 const getPerson=async({params}:Request,res:Response)=>{
@@ -12,6 +12,16 @@ const getPerson=async({params}:Request,res:Response)=>{
         handleHttp(res,"ERROR_GET_USER");
     }
 };
+
+const getUsersPagCtrl=async({params}:Request,res:Response)=>{
+    try {
+        const {numPage}=params
+        const response=await getUsersPag(numPage);
+        res.send(response);
+    } catch (e) {
+        handleHttp(res,"ERROR_GET_USERS");
+    }
+}
 
 const getPeople=async(req:Request,res:Response)=>{
     try{
@@ -121,4 +131,4 @@ const getFollowersCtrl = async (req: Request, res: Response) => {
       }
   };
 
-export{getPerson,getPeople,postPerson,updatePerson,deletePerson,getFollowersCtrl,getFollowedCtrl,follower,followed,removeFollowerCtrl,removeFollowedCtrl};
+export{getPerson,getPeople,postPerson,updatePerson,deletePerson,getFollowersCtrl,getFollowedCtrl,follower,followed,removeFollowerCtrl,removeFollowedCtrl,getUsersPagCtrl};

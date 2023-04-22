@@ -13,6 +13,13 @@ const getUsers = async() => {
     return responseItem;
 };
 
+const getUsersPag = async( numPage: string) => {
+  const usersPorPagina = 3;
+  const salto = (parseInt(numPage,10) - 1) * usersPorPagina;
+  const responseItem = await UserModel.find().skip(salto).limit(usersPorPagina).exec();//Saltar las localizaciones ya vistas, presentar las de su pagina correspondiente
+  return responseItem;
+};
+
 const getUser = async(id: string) => {
     const responseItem = await UserModel.findOne({_id: id});
     return responseItem;
@@ -91,4 +98,4 @@ const getAllFollowers = async (userId: string) => {
         
         return responseItem;
       };
-export {insertUser, getUser, getUsers, updateUser, deleteUser, getAllFollowed, getAllFollowers,addFollower,addFollowed,removeFollowed,removeFollower};
+export {insertUser, getUser, getUsers, updateUser, deleteUser, getAllFollowed, getAllFollowers,addFollower,addFollowed,removeFollowed,removeFollower,getUsersPag};
