@@ -1,7 +1,7 @@
 /** Esta ruta nos va a devolver un array de objetos, que va a venir de una base de datos (carpeta config)*/
 
 import { Request, Response, Router } from "express";
-import { postApplicationController, updateApplicationController, deleteApplicationController, getAllApplicationsController, getParticularApplicationController } from "../controllers/application";
+import { postApplicationController, updateApplicationController, deleteApplicationController, getAllApplicationsController, getParticularApplicationController, getAllPaginatedApplicationsController } from "../controllers/application";
 
 const router = Router(); 
 
@@ -19,5 +19,8 @@ router.get("/getAllApplications", getAllApplicationsController);
 
 // (5) Get (obtain) a particular Application ...
 router.get("/getApplication/:idApplication", getParticularApplicationController);
+
+// (6) Get all paginated applications
+router.get("/getAllPaginatedApplications/:numPage", getAllPaginatedApplicationsController);
 
 export {router};
