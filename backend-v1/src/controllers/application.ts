@@ -1,6 +1,6 @@
 import { Request,Response } from "express";
 import { handleHttp } from "../utils/error.handle";
-import { postApplication, updateApplication, deleteApplication, getAllApplication, getParticularApplication } from "../services/application";
+import { postApplication, updateApplication, deleteApplication, getAllApplication, getParticularApplication, getAllPaginatedApplications } from "../services/application";
 
 // (1) Post (creation) of an Application ...
 const postApplicationController=async ({body}:Request,res:Response)=>{
@@ -58,4 +58,16 @@ const getParticularApplicationController=async({params}:Request,res:Response)=>{
     }
 };
 
-export{postApplicationController, updateApplicationController, deleteApplicationController, getAllApplicationsController, getParticularApplicationController};
+// (6) Get all paginated applications
+const getAllPaginatedApplicationsController=async({params}:Request,res:Response)=>{
+    try{
+        const {numPage}=params;
+        const response=await getAllPaginatedApplications(numPage); 
+        const data=response ? response:"NOT_FOUND";
+        res.send(data);
+    } catch(e){
+        handleHttp(res,"ERROR_GET_ALL_PAGINATED_APPLICATION");
+    }
+};
+
+export{postApplicationController, updateApplicationController, deleteApplicationController, getAllApplicationsController, getParticularApplicationController, getAllPaginatedApplicationsController};

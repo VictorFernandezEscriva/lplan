@@ -1,6 +1,6 @@
 import { Request,Response } from "express";
 import { handleHttp } from "../utils/error.handle";
-import { postOnePublication, getAllPublications, getNumPublications, getPublication, updateOnePublication, deleteOnePublication, updateLikes } from "../services/publication";
+import { postOnePublication, getAllPublications, getNumPublications, getPublication, updateOnePublication, deleteOnePublication, updateLikes, getAllPaginatedPublications } from "../services/publication";
 
 
 // (1) Get (obtain) comments ...
@@ -82,4 +82,16 @@ const updateLikesPublication=async ({params}:Request,res:Response)=>{
     }
 };
 
-export{postPublication, getPaginatePublications, getAllAvailablePublications, getOnePublication, updatePublication, deletePublication, updateLikesPublication};
+// (8) Get all paginated publications
+const getAllPaginatedPublicationsController=async({params}:Request,res:Response)=>{
+    try{
+        const {numPage}=params;
+        const response=await getAllPaginatedPublications(numPage); 
+        const data=response ? response:"NOT_FOUND";
+        res.send(data);
+    } catch(e){
+        handleHttp(res,"ERROR_GET_ALL_PAGINATED_PUBLICATIONS");
+    }
+};
+
+export{postPublication, getPaginatePublications, getAllAvailablePublications, getOnePublication, updatePublication, deletePublication, updateLikesPublication, getAllPaginatedPublicationsController};

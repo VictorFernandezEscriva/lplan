@@ -52,4 +52,12 @@ const updateLikes = async(idPublication:string, idUser:string) => {
     return responseItem;
 };
 
-export {getNumPublications, postOnePublication, getAllPublications, getPublication, updateOnePublication, deleteOnePublication, updateLikes};
+// (8) Get all paginated publications
+const getAllPaginatedPublications = async(numPage: string) => {
+    const publicationsPorPagina = 2;
+    const salto = (parseInt(numPage) - 1) * publicationsPorPagina;
+    const responseItem = await PublicationModel.find({}).skip(salto).limit(publicationsPorPagina).exec();
+    return responseItem;
+};
+
+export {getNumPublications, postOnePublication, getAllPublications, getPublication, updateOnePublication, deleteOnePublication, updateLikes, getAllPaginatedPublications};
