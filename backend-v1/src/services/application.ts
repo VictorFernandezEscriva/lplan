@@ -34,9 +34,9 @@ const getParticularApplication  = async(idApplication: string) => {
 
 // (6) Get all paginated applications
 const getAllPaginatedApplications  = async(numPage:string) => {
-    const comentariosPorPagina = 2;
-    const salto = (parseInt(numPage) - 1) * comentariosPorPagina;
-    const responseItem = await ApplicationModel.find({}).skip(salto).limit(comentariosPorPagina).exec();
+    const applicationsPorPagina = 2;
+    const salto = (parseInt(numPage) - 1) * applicationsPorPagina;
+    const responseItem = await ApplicationModel.find({}).skip(salto).limit(applicationsPorPagina).exec();
     return responseItem;
 };
 
