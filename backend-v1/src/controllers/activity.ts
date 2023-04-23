@@ -5,12 +5,17 @@ import { postActivity, updateActivity, deleteActivity, getAllActivities, getPart
 // (1) Post (creation) of an activity ...
 // Nombre del Servicio >> postActivity
 const postActivityController=async ({body}:Request,res:Response)=>{
+    
+    if(body.idLocation==""){
+        body.idLocation=undefined;
+    }
+    console.log("Controllers"+body);
     try{
         const response=await postActivity(body);
         const data=response ? response:"NOT_FOUND";
         res.send(data);
     }catch(e){
-        handleHttp(res,"ERROR_POST_ACTIVITY");
+        handleHttp(res,"ERROR_POST_ACTIVITY"+e);
     }
 };
 
