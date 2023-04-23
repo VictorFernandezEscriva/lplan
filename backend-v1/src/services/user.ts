@@ -14,9 +14,9 @@ const getUsers = async() => {
 };
 
 const getUsersPag = async( numPage: string) => {
-  const usersPorPagina = 3;
+  const usersPorPagina = 2;
   const salto = (parseInt(numPage,10) - 1) * usersPorPagina;
-  const responseItem = await UserModel.find().skip(salto).limit(usersPorPagina).exec();//Saltar las localizaciones ya vistas, presentar las de su pagina correspondiente
+  const responseItem = await UserModel.find({}).skip(salto).limit(usersPorPagina).exec();//Saltar las localizaciones ya vistas, presentar las de su pagina correspondiente
   return responseItem;
 };
 

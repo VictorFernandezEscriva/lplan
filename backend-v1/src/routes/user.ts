@@ -20,6 +20,6 @@ router.post('/follower', follower);
 router.post('/followed', followed);
 router.delete('/remfollower/:idUser/:idFollower', removeFollowedCtrl);
 router.post('/remfollowed/:idUser/:idFollowed', removeFollowerCtrl);
-router.get("all/:numPage",getUsersPagCtrl);
+router.get("/all/:numPage",getUsersPagCtrl);
 
 export {router};
