@@ -13,6 +13,9 @@ const loginCtrl = async ({ body }: Request, res: Response) => {
   if (responseUser === "PASSWORD_INCORRECT") {
     res.status(403);
     res.send(responseUser);
+  } else if (responseUser == "USER_NOT_ADMIN") {
+    res.status(406);
+    res.send(responseUser);
   } else {
     res.send(responseUser);
   }
