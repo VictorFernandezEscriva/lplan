@@ -65,10 +65,11 @@ const deletePerson=async ({params}:Request,res:Response)=>{
 
 const getFollowersCtrl = async (req: Request, res: Response) => {
     const { userId } = req.params;
+    const { numPage } = req.params;
     console.log(userId);
 
     try {
-      const users = await getAllFollowers(userId);
+      const users = await getAllFollowers(userId, numPage);
       return res.status(200).json(users);
     } catch (err) {
       console.error(err);
@@ -78,9 +79,10 @@ const getFollowersCtrl = async (req: Request, res: Response) => {
   
   const getFollowedCtrl = async (req: Request, res: Response) => {
     const { userId } = req.params;
+    const { numPage } = req.params;
     console.log(userId);
     try {
-      const users = await getAllFollowed(userId);
+      const users = await getAllFollowed(userId, numPage);
       return res.status(200).json(users);
     } catch (err) {
       console.error(err);
