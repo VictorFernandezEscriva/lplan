@@ -66,4 +66,22 @@ const getAllPaginatedComments = async(numPage: string) => {
     return responseItem;
 };
 
-export {getCommentsPublication, postCommentPublication, postAnswerPublication, updateCommentPublication, deleteCommentPublication, getAllComments, getComment, updateLikes, getAllPaginatedComments};
+// (10) Get responses of a comment
+const getResponsesOfComment =async (idComment:string, numPage:string) => {
+    const comentariosPorPagina = 2;
+    const salto = (parseInt(numPage) - 1) * comentariosPorPagina;
+    const originalComment = await CommentModel.findById(idComment);
+    if (!originalComment) {
+        // Manejar el caso en que el comentario original no exista
+        throw new Error(`Comentario con _id=${idComment} no encontrado`);
+    }
+    const responseCommentIds = originalComment.responseComment;
+    if (!responseCommentIds || responseCommentIds.length === 0) {
+        // Manejar el caso en que no haya comentarios de respuesta
+        return [];
+    }
+    const responseItem = await CommentModel.find({_id: { $in: responseCommentIds }}).skip(salto).limit(comentariosPorPagina).exec();
+    return responseItem;
+}
+
+export {getCommentsPublication, postCommentPublication, postAnswerPublication, updateCommentPublication, deleteCommentPublication, getAllComments, getComment, updateLikes, getAllPaginatedComments, getResponsesOfComment};
