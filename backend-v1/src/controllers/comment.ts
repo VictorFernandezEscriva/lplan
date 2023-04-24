@@ -1,6 +1,6 @@
 import { Request,Response } from "express";
 import { handleHttp } from "../utils/error.handle";
-import { getCommentsPublication, postCommentPublication, postAnswerPublication, updateCommentPublication, deleteCommentPublication, getAllComments, getComment, updateLikes, getAllPaginatedComments, getResponsesOfComment } from "../services/comment";
+import { getCommentsPublication, postCommentPublication, getCountComment,postAnswerPublication, updateCommentPublication, deleteCommentPublication, getAllComments, getComment, updateLikes, getAllPaginatedComments, getResponsesOfComment } from "../services/comment";
 
 // (1) Get (obtain) comments ...
 const getComments=async({params}:Request,res:Response)=>{
@@ -118,4 +118,14 @@ const getResponsesOfParticularComment = async({params}:Request,res:Response)=>{
     }
 };
 
-export{getComments,postComment,postAnswer,updateComment,deleteComment, getAllAvailableComments, getOneComment, updateLikesComment, getAllPaginatedCommentsController, getResponsesOfParticularComment};
+const getCountComments=async(req:Request,res:Response)=>{
+    try{
+        const response=await getCountComment(); 
+        const data=response ? response:"NOT_FOUND";
+        res.send(data);
+    } catch(e){
+        handleHttp(res,"ERROR_GET_COUNT_COMMENTS");
+    }
+};
+
+export{getCountComments,getComments,postComment,postAnswer,updateComment,deleteComment, getAllAvailableComments, getOneComment, updateLikesComment, getAllPaginatedCommentsController, getResponsesOfParticularComment};

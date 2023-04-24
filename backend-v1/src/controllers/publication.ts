@@ -1,6 +1,6 @@
 import { Request,Response } from "express";
 import { handleHttp } from "../utils/error.handle";
-import { postOnePublication, getAllPublications, getNumPublications, getPublication, updateOnePublication, deleteOnePublication, updateLikes, getAllPaginatedPublications } from "../services/publication";
+import {getCountPublication, postOnePublication, getAllPublications, getNumPublications, getPublication, updateOnePublication, deleteOnePublication, updateLikes, getAllPaginatedPublications } from "../services/publication";
 
 
 // (1) Get (obtain) comments ...
@@ -94,4 +94,14 @@ const getAllPaginatedPublicationsController=async({params}:Request,res:Response)
     }
 };
 
-export{postPublication, getPaginatePublications, getAllAvailablePublications, getOnePublication, updatePublication, deletePublication, updateLikesPublication, getAllPaginatedPublicationsController};
+const getCountPublications=async(req:Request,res:Response)=>{
+    try{
+        const response=await getCountPublication();
+        const data=response ? response:"NOT_FOUND";
+        res.send(data);
+    } catch(e){
+        handleHttp(res,"ERROR_GET_COUNT_PUBLICATIONS");
+    }
+};
+
+export{getCountPublications,postPublication, getPaginatePublications, getAllAvailablePublications, getOnePublication, updatePublication, deletePublication, updateLikesPublication, getAllPaginatedPublicationsController};

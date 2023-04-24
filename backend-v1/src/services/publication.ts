@@ -60,4 +60,9 @@ const getAllPaginatedPublications = async(numPage: string) => {
     return responseItem;
 };
 
-export {getNumPublications, postOnePublication, getAllPublications, getPublication, updateOnePublication, deleteOnePublication, updateLikes, getAllPaginatedPublications};
+const getCountPublication = async() => {
+
+    const responseItem = (await PublicationModel.countDocuments({})).toString();
+    return responseItem;
+};
+export {getNumPublications,getCountPublication, postOnePublication, getAllPublications, getPublication, updateOnePublication, deleteOnePublication, updateLikes, getAllPaginatedPublications};

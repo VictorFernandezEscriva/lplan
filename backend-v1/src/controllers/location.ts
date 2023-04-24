@@ -1,5 +1,5 @@
 import { Request,Response } from "express";
-import { insertLocation, getLocation, getLocations, updateLocation, deleteLocation,getAllLocations} from "../services/location";
+import { insertLocation, getLocation, getLocations, updateLocation, deleteLocation,getAllLocations, getCountLocation} from "../services/location";
 import { handleHttp } from "../utils/error.handle";
 
 const getLoc=async({params}:Request,res:Response)=>{
@@ -61,4 +61,14 @@ const deleteLoc=async ({params}:Request,res:Response)=>{
     }
 };
 
-export{getLoc,getAllLocs,updateLoc,postLoc,deleteLoc,getLocs};
+const getCountLocations=async(req:Request,res:Response)=>{
+    try{
+        const response=await getCountLocation(); 
+        const data=response ? response:"NOT_FOUND";
+        res.send(data);
+    } catch(e){
+        handleHttp(res,"ERROR_GET_COUNT_LOCATIONS");
+    }
+};
+
+export{getCountLocations,getLoc,getAllLocs,updateLoc,postLoc,deleteLoc,getLocs};

@@ -35,5 +35,11 @@ const deleteLocation = async(id: string) => {
     return responseItem;
 }
 
+const getCountLocation = async() => {
 
-export {insertLocation, getLocation, getLocations, updateLocation, deleteLocation,getAllLocations};
+    const responseItem = (await LocationModel.countDocuments({})).toString();
+    return responseItem;
+};
+
+
+export {insertLocation,getCountLocation, getLocation, getLocations, updateLocation, deleteLocation,getAllLocations};

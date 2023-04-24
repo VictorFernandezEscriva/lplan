@@ -1,7 +1,7 @@
 /** Esta ruta nos va a devolver un array de objetos, que va a venir de una base de datos (carpeta config)*/
 
 import { Request, Response, Router } from "express";
-import { deletePerson, getPerson, getPeople, postPerson, updatePerson, getFollowersCtrl, getFollowedCtrl,follower,followed,removeFollowedCtrl,removeFollowerCtrl,getUsersPagCtrl } from "../controllers/user";
+import { deletePerson, getPerson, getPeople, postPerson, updatePerson, getFollowersCtrl, getFollowedCtrl,follower,followed,removeFollowedCtrl,removeFollowerCtrl,getUsersPagCtrl, getCountUsers } from "../controllers/user";
 import { logMiddleware } from "../middleware/log";
 
 const router = Router(); //es el manejador de las rutas, las interpreta, con esto podremos crear los GET, POST ....
@@ -21,5 +21,6 @@ router.post('/followed', followed);
 router.delete('/remfollower/:idUser/:idFollower', removeFollowedCtrl);
 router.post('/remfollowed/:idUser/:idFollowed', removeFollowerCtrl);
 router.get("/all/:numPage",getUsersPagCtrl);
+router.get("/all/count/docs",getCountUsers);
 
 export {router};

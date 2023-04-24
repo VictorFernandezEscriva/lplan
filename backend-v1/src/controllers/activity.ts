@@ -1,6 +1,6 @@
 import { Request,Response } from "express";
 import { handleHttp } from "../utils/error.handle";
-import { postActivity, updateActivity, deleteActivity, getAllActivities, getParticularActivity, getAllPaginatedActivities, getParticipantsOfActivity } from "../services/activity";
+import { postActivity, updateActivity, deleteActivity, getAllActivities, getParticularActivity, getAllPaginatedActivities, getParticipantsOfActivity,getCountActivity } from "../services/activity";
 
 // (1) Post (creation) of an activity ...
 // Nombre del Servicio >> postActivity
@@ -93,5 +93,16 @@ const getParticipantsOfParticularActivity = async({params}:Request,res:Response)
     }
 };
 
+const getCountActivities=async(req:Request,res:Response)=>{
+    try{
+        const response=await getCountActivity();
+        const data=response ? response:"NOT_FOUND";
+        res.send(data);
+    } catch(e){
+        handleHttp(res,"ERROR_GET_COUNT_ACTIVITIES");
+    }
+};
 
-export{postActivityController, updateActivityController, deleteActivityController, getAllActivitiesController, getParticularActivityController, getAllPaginatedActivitiesController, getParticipantsOfParticularActivity};
+
+
+export{getCountActivities,postActivityController, updateActivityController, deleteActivityController, getAllActivitiesController, getParticularActivityController, getAllPaginatedActivitiesController, getParticipantsOfParticularActivity};
