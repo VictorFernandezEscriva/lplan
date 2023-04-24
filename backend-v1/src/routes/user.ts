@@ -3,6 +3,7 @@
 import { Request, Response, Router } from "express";
 import { deletePerson, getPerson, getPeople, postPerson, updatePerson, getFollowersCtrl, getFollowedCtrl,follower,followed,removeFollowedCtrl,removeFollowerCtrl,getUsersPagCtrl } from "../controllers/user";
 import { logMiddleware } from "../middleware/log";
+import { checkAdmin } from "../middleware/session";
 
 const router = Router(); //es el manejador de las rutas, las interpreta, con esto podremos crear los GET, POST ....
 
@@ -12,7 +13,7 @@ const router = Router(); //es el manejador de las rutas, las interpreta, con est
 router.get("/all", logMiddleware, getPeople);
 router.get("/:idUser", getPerson);
 router.post("/",postPerson);
-router.put("/:idUser",updatePerson);
+router.put("/:idUser", updatePerson);
 router.delete("/:idUser", deletePerson);
 router.get("/follower/:userId", getFollowersCtrl);
 router.get("/followed/:userId", getFollowedCtrl);
