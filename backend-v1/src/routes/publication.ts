@@ -1,6 +1,6 @@
 import { Request, Response, Router } from "express";
 import { logMiddleware } from "../middleware/log";
-import { getPaginatePublications, postPublication, getAllAvailablePublications, getOnePublication, updatePublication, deletePublication, updateLikesPublication, getAllPaginatedPublicationsController } from "../controllers/publication";
+import { getPaginatePublications, postPublication, getAllAvailablePublications, getOnePublication, updatePublication, deletePublication, updateLikesPublication, getAllPaginatedPublicationsController, getCountPublications } from "../controllers/publication";
 
 const router = Router(); //es el manejador de las rutas, las interpreta, con esto podremos crear los GET, POST ....
 
@@ -31,5 +31,7 @@ router.put("/updateLikesPublication/:idPublication/:idUser", updateLikesPublicat
 
 // (8) Get all paginated publications
 router.get("/getAllPaginatedPublications/:numPage", getAllPaginatedPublicationsController);
+
+router.get("/all/count/docs",getCountPublications);
 
 export {router};

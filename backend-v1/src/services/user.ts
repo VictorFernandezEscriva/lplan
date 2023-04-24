@@ -36,21 +36,34 @@ const deleteUser = async(id: string) => {
 }
 
 
-const getAllFollowers = async (userId: string) => {
-    
-    const follower=await UserModel.findById(userId).populate('followersUser');
+const getAllFollowers = async (userId: string, numPage:string) => {
+    const usersPorPagina = 2;
+    const salto = (parseInt(numPage) - 1) * usersPorPagina;
+    const follower=await UserModel.findById(userId);
     if(!userId){
         throw new Error(`User with ID ${userId} not found`);
     }
-    return follower?.followersUser;
-  };
+    const userFollowers = follower?.followersUser
+    if(!userFollowers || userFollowers.length ===0){
+      return [];
+    }
+    const responseItem = await UserModel.find({_id: { $in: userFollowers }}).skip(salto).limit(usersPorPagina).exec();
+    return responseItem;
+};
   
-  const getAllFollowed = async (userId: string) => {
-    const followed = await UserModel.findById(userId).populate('followedUser');
+  const getAllFollowed = async (userId: string, numPage:string) => {
+    const usersPorPagina = 2;
+    const salto = (parseInt(numPage) - 1) * usersPorPagina;
+    const followed = await UserModel.findById(userId);
     if (!userId) {
       throw new Error('User not found');
     }
-    return followed?.followedUser;
+    const userFollowed = followed?.followedUser
+    if(!userFollowed || userFollowed.length ===0){
+      return [];
+    }
+    const responseItem = await UserModel.find({_id: { $in: userFollowed }}).skip(salto).limit(usersPorPagina).exec();
+    return responseItem;
   };
   const addFollower = async (idUser: string, idFollower: string) => {
     const responseItem=await UserModel.findOneAndUpdate(
@@ -98,4 +111,10 @@ const getAllFollowers = async (userId: string) => {
         
         return responseItem;
       };
-export {insertUser, getUser, getUsers, updateUser, deleteUser, getAllFollowed, getAllFollowers,addFollower,addFollowed,removeFollowed,removeFollower,getUsersPag};
+      const getCountUser = async() => {
+
+        const responseItem = (await UserModel.countDocuments({})).toString();
+        return responseItem;
+    };
+
+export {getCountUser,insertUser, getUser, getUsers, updateUser, deleteUser, getAllFollowed, getAllFollowers,addFollower,addFollowed,removeFollowed,removeFollower,getUsersPag};

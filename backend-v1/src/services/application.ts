@@ -39,5 +39,11 @@ const getAllPaginatedApplications  = async(numPage:string) => {
     const responseItem = await ApplicationModel.find({}).skip(salto).limit(applicationsPorPagina).exec();
     return responseItem;
 };
+const getCountApplication = async() => {
 
-export {postApplication, updateApplication, deleteApplication, getAllApplication, getParticularApplication, getAllPaginatedApplications};
+    const responseItem = (await ApplicationModel.countDocuments({})).toString();
+    return responseItem;
+};
+
+
+export {postApplication, getCountApplication,updateApplication, deleteApplication, getAllApplication, getParticularApplication, getAllPaginatedApplications};

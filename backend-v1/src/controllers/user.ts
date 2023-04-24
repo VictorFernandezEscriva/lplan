@@ -1,5 +1,5 @@
 import { Request,Response } from "express";
-import { insertUser,getUsers,getUser,updateUser,deleteUser, getAllFollowed, getAllFollowers, addFollowed,addFollower,removeFollowed,removeFollower, getUsersPag} from "../services/user";
+import { insertUser,getUsers,getUser,updateUser,deleteUser, getCountUser,getAllFollowed, getAllFollowers, addFollowed,addFollower,removeFollowed,removeFollower, getUsersPag} from "../services/user";
 import { handleHttp } from "../utils/error.handle";
 
 const getPerson=async({params}:Request,res:Response)=>{
@@ -65,10 +65,11 @@ const deletePerson=async ({params}:Request,res:Response)=>{
 
 const getFollowersCtrl = async (req: Request, res: Response) => {
     const { userId } = req.params;
+    const { numPage } = req.params;
     console.log(userId);
 
     try {
-      const users = await getAllFollowers(userId);
+      const users = await getAllFollowers(userId, numPage);
       return res.status(200).json(users);
     } catch (err) {
       console.error(err);
@@ -78,9 +79,10 @@ const getFollowersCtrl = async (req: Request, res: Response) => {
   
   const getFollowedCtrl = async (req: Request, res: Response) => {
     const { userId } = req.params;
+    const { numPage } = req.params;
     console.log(userId);
     try {
-      const users = await getAllFollowed(userId);
+      const users = await getAllFollowed(userId, numPage);
       return res.status(200).json(users);
     } catch (err) {
       console.error(err);
@@ -131,4 +133,14 @@ const getFollowersCtrl = async (req: Request, res: Response) => {
       }
   };
 
-export{getPerson,getPeople,postPerson,updatePerson,deletePerson,getFollowersCtrl,getFollowedCtrl,follower,followed,removeFollowerCtrl,removeFollowedCtrl,getUsersPagCtrl};
+  const getCountUsers=async(req:Request,res:Response)=>{
+    try{
+        const response=await getCountUser(); 
+        const data=response ? response:"NOT_FOUND";
+        res.send(data);
+    } catch(e){
+        handleHttp(res,"ERROR_GET_COUNT_USERS");
+    }
+};
+
+export{getCountUsers,getPerson,getPeople,postPerson,updatePerson,deletePerson,getFollowersCtrl,getFollowedCtrl,follower,followed,removeFollowerCtrl,removeFollowedCtrl,getUsersPagCtrl};

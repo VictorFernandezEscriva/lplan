@@ -1,6 +1,6 @@
 import { Request,Response } from "express";
 import { handleHttp } from "../utils/error.handle";
-import { postActivity, updateActivity, deleteActivity, getAllActivities, getParticularActivity } from "../services/activity";
+import { postActivity, updateActivity, deleteActivity, getAllActivities, getParticularActivity, getAllPaginatedActivities, getParticipantsOfActivity,getCountActivity } from "../services/activity";
 
 // (1) Post (creation) of an activity ...
 // Nombre del Servicio >> postActivity
@@ -68,4 +68,41 @@ const getParticularActivityController=async({params}:Request,res:Response)=>{
     }
 };
 
-export{postActivityController, updateActivityController, deleteActivityController, getAllActivitiesController, getParticularActivityController};
+// (6) Get all paginated activities
+const getAllPaginatedActivitiesController=async({params}:Request,res:Response)=>{
+    try{
+        const {numPage}=params;
+        const response=await getAllPaginatedActivities(numPage); 
+        const data=response ? response:"NOT_FOUND";
+        res.send(data);
+    } catch(e){
+        handleHttp(res,"ERROR_GET_ALL_PAGINATED_ACTIVITIES");
+    }
+};
+
+// (7) Get participants of an activity
+const getParticipantsOfParticularActivity = async({params}:Request,res:Response)=>{
+    try{
+        const {idActivity}=params;
+        const {numPage}=params;
+        const response=await getParticipantsOfActivity(idActivity,numPage); 
+        const data=response ? response:"NOT_FOUND";
+        res.send(data);
+    } catch(e){
+        handleHttp(res,"ERROR_GET_THAT_ACTIVITY");
+    }
+};
+
+const getCountActivities=async(req:Request,res:Response)=>{
+    try{
+        const response=await getCountActivity();
+        const data=response ? response:"NOT_FOUND";
+        res.send(data);
+    } catch(e){
+        handleHttp(res,"ERROR_GET_COUNT_ACTIVITIES");
+    }
+};
+
+
+
+export{getCountActivities,postActivityController, updateActivityController, deleteActivityController, getAllActivitiesController, getParticularActivityController, getAllPaginatedActivitiesController, getParticipantsOfParticularActivity};
