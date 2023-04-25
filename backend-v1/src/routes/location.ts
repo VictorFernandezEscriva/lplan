@@ -1,6 +1,7 @@
 import { Request, Response, Router } from "express";
 import { getLoc,getAllLocs,updateLoc,postLoc,deleteLoc,getLocs } from "../controllers/location";
 import { logMiddleware } from "../middleware/log";
+import { checkAdmin } from "../middleware/session";
 
 const router = Router(); //es el manejador de las rutas, las interpreta, con esto podremos crear los GET, POST ....
 
@@ -12,6 +13,6 @@ router.get("/all/:numPage",getLocs)
 router.get("/:idLocation", getLoc);
 router.post("/",postLoc);
 router.put("/:idLocation",updateLoc);
-router.delete("/:idLocation", deleteLoc);
+router.delete("/:idLocation", checkAdmin ,deleteLoc);
 
 export {router};
