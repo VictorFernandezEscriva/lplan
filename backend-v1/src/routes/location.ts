@@ -1,5 +1,5 @@
 import { Request, Response, Router } from "express";
-import { getLoc,getAllLocs,updateLoc,postLoc,deleteLoc,getLocs } from "../controllers/location";
+import { getLoc,getAllLocs,updateLoc,postLoc,deleteLoc,getLocs, getCountLocations } from "../controllers/location";
 import { logMiddleware } from "../middleware/log";
 import { checkAdmin } from "../middleware/session";
 
@@ -14,5 +14,6 @@ router.get("/:idLocation", getLoc);
 router.post("/",postLoc);
 router.put("/:idLocation",updateLoc);
 router.delete("/:idLocation", checkAdmin ,deleteLoc);
+router.get("/all/count/docs",getCountLocations);
 
 export {router};

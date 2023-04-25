@@ -84,4 +84,11 @@ const getResponsesOfComment =async (idComment:string, numPage:string) => {
     return responseItem;
 }
 
-export {getCommentsPublication, postCommentPublication, postAnswerPublication, updateCommentPublication, deleteCommentPublication, getAllComments, getComment, updateLikes, getAllPaginatedComments, getResponsesOfComment};
+const getCountComment = async() => {
+
+    const responseItem = (await CommentModel.countDocuments({})).toString();
+    return responseItem;
+};
+
+
+export {getCommentsPublication, getCountComment,postCommentPublication, postAnswerPublication, updateCommentPublication, deleteCommentPublication, getAllComments, getComment, updateLikes, getAllPaginatedComments, getResponsesOfComment};

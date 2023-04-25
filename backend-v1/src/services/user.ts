@@ -111,4 +111,10 @@ const getAllFollowers = async (userId: string, numPage:string) => {
         
         return responseItem;
       };
-export {insertUser, getUser, getUsers, updateUser, deleteUser, getAllFollowed, getAllFollowers,addFollower,addFollowed,removeFollowed,removeFollower,getUsersPag};
+      const getCountUser = async() => {
+
+        const responseItem = (await UserModel.countDocuments({})).toString();
+        return responseItem;
+    };
+
+export {getCountUser,insertUser, getUser, getUsers, updateUser, deleteUser, getAllFollowed, getAllFollowers,addFollower,addFollowed,removeFollowed,removeFollower,getUsersPag};

@@ -2,6 +2,7 @@ import { Activity } from "../interfaces/activity.interface";
 import ActivityModel from "../models/activity";
 import paginate from 'mongoose-paginate-v2';
 import UserModel from "../models/user";
+import { json } from "express";
 
 // (1) Post (creation) of an activity ...
 const postActivity = async(item: Activity) => {
@@ -60,8 +61,14 @@ const getParticipantsOfActivity =async (idActivity:string, numPage:string) => {
     return responseItem;
 }
 
+const getCountActivity = async() => {
+
+    const responseItem = (await ActivityModel.countDocuments({})).toString();
+
+    return responseItem;
+};
 
 
 
 
-export {postActivity, updateActivity, deleteActivity, getAllActivities, getParticularActivity, getAllPaginatedActivities, getParticipantsOfActivity};
+export {getCountActivity,postActivity, updateActivity, deleteActivity, getAllActivities, getParticularActivity, getAllPaginatedActivities, getParticipantsOfActivity};

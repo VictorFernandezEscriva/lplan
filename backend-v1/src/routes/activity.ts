@@ -1,5 +1,5 @@
 import { Request, Response, Router } from "express";
-import { postActivityController, updateActivityController, deleteActivityController, getAllActivitiesController, getParticularActivityController, getAllPaginatedActivitiesController, getParticipantsOfParticularActivity } from "../controllers/activity";
+import { postActivityController,getCountActivities, updateActivityController, deleteActivityController, getAllActivitiesController, getParticularActivityController, getAllPaginatedActivitiesController, getParticipantsOfParticularActivity } from "../controllers/activity";
 import { logMiddleware } from "../middleware/log";
 
 const router = Router(); 
@@ -29,5 +29,7 @@ router.get("/getAllPaginatedActivities/:numPage", getAllPaginatedActivitiesContr
 
 // (7) Get participants of an activity
 router.get("/getParticipantsOfActivity/:idActivity/:numPage", getParticipantsOfParticularActivity);
+
+router.get("/all/count/docs",getCountActivities);
 
 export {router};
