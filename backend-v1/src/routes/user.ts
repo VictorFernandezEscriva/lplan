@@ -18,8 +18,8 @@ router.get("/follower/:userId/:numPage", getFollowersCtrl);
 router.get("/followed/:userId/:numPage", getFollowedCtrl);
 router.post('/follower', follower);
 router.post('/followed', followed);
-router.delete('/remfollower/:idUser/:idFollower', removeFollowedCtrl);
-router.post('/remfollowed/:idUser/:idFollowed', removeFollowerCtrl);
+router.delete('/remfollower/:idUser/:idFollower', removeFollowerCtrl);
+router.post('/remfollowed/:idUser/:idFollowed', removeFollowedCtrl);
 router.get("/all/:numPage",getUsersPagCtrl);
 router.get("/all/count/docs",getCountUsers);
 

@@ -99,15 +99,16 @@ const getAllFollowers = async (userId: string, numPage:string) => {
         return responseItem;
       };
       const removeFollower = async (idUser: string, idFollower: string) => {
+        console.log("removeFOllower!!!");
         const responseItem = await UserModel.findOneAndUpdate(
           {_id: idUser},
           {$pull: {followersUser: new Types.ObjectId(idFollower)}},
           {new: true}
-        ).populate('followersUser');
-        console.log(responseItem);
+        ).then((data)=>console.log("resposta:",data));
+       /* console.log(responseItem);
         if (!responseItem) {
           throw new Error('User not found');
-        }
+        }*/
         
         return responseItem;
       };
