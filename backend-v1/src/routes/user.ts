@@ -10,7 +10,7 @@ const router = Router(); //es el manejador de las rutas, las interpreta, con est
 /**
  * http://localhost:3002/items [GET]
  */
-router.get("/all", logMiddleware, getPeople);
+router.get("/users/all", logMiddleware, getPeople);
 router.get("/:idUser", getPerson);
 router.post("/",postPerson);
 router.put("/:idUser", updatePerson);
@@ -23,5 +23,7 @@ router.delete('/remfollower/:idUser/:idFollower', removeFollowerCtrl);
 router.post('/remfollowed/:idUser/:idFollowed', removeFollowedCtrl);
 router.get("/all/:numPage",getUsersPagCtrl);
 router.get("/all/count/docs",getCountUsers);
+
+
 
 export {router};
