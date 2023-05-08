@@ -1,7 +1,7 @@
 /** Esta ruta nos va a devolver un array de objetos, que va a venir de una base de datos (carpeta config)*/
 
 import { Request, Response, Router } from "express";
-import {registerCtrl, loginCtrl} from "../controllers/auth"
+import {registerCtrl, loginCtrl, loginFrontendCtrl} from "../controllers/auth"
 
 const router = Router(); //es el manejador de las rutas, las interpreta, con esto podremos crear los GET, POST ....
 
@@ -10,5 +10,8 @@ router.post("/register", registerCtrl);
 
 /** http://localhost:3002/auth/login [POST] */
 router.post("/login", loginCtrl);
+
+/** http://localhost:3002/auth/loginfrontend [POST] */
+router.post("/loginfrontend", loginFrontendCtrl);
 
 export {router};

@@ -33,4 +33,22 @@ const loginUser = async (body: Auth) => {
     return data;
   };
 
-export {registerNewUser, loginUser};
+const loginFrontend = async (body: Auth) => {
+    const { mailUser, passwordUser } = body;
+
+    const checkIs = await UserModel.findOne({ mailUser: mailUser });
+
+    // CASO 1: NO EXISTE EL USUARIO ...
+    if (!checkIs) return 'NOT_FOUND_USER';
+  
+    // CASO 2: CONTRASEÑA INCORRECTA ...
+    const passwordHash = checkIs.passwordUser; 
+    const isCorrect = await verified(passwordUser, passwordHash);
+    if (!isCorrect) return "PASSWORD_INCORRECT";
+  
+    const token = generateToken(checkIs.mailUser, checkIs.roleUser);
+    const data = {token, user: checkIs};
+    return data;
+  };
+
+export {registerNewUser, loginUser, loginFrontend};
