@@ -16,9 +16,10 @@ const loginUser = async (body: Auth) => {
     const { mailUser, passwordUser } = body;
 
     const checkIs = await UserModel.findOne({ mailUser: mailUser });
+    console.log(checkIs);
 
     // CASO 1: NO EXISTE EL USUARIO ...
-    if (!checkIs) return 'NOT_FOUND_USER';
+    if (!checkIs) return "NOT_FOUND_USER";
   
     // CASO 2: CONTRASEÑA INCORRECTA ...
     const passwordHash = checkIs.passwordUser; 
