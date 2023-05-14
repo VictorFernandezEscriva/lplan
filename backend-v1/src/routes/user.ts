@@ -1,7 +1,7 @@
 /** Esta ruta nos va a devolver un array de objetos, que va a venir de una base de datos (carpeta config)*/
 
 import { Request, Response, Router } from "express";
-import { deletePerson, getPerson, getPeople, postPerson, updatePerson, getFollowersCtrl, getFollowedCtrl,follower,followed,removeFollowedCtrl,removeFollowerCtrl,getUsersPagCtrl, getCountUsers } from "../controllers/user";
+import { deletePerson, getPerson, getPeople, postPerson, updatePerson, getFollowersCtrl, getFollowedCtrl,follower,followed,removeFollowedCtrl,removeFollowerCtrl,getUsersPagCtrl, getCountUsers, getSearchUserCtrl } from "../controllers/user";
 import { logMiddleware } from "../middleware/log";
 import { checkAdmin } from "../middleware/session";
 
@@ -23,6 +23,7 @@ router.delete('/remfollower/:idUser/:idFollower', removeFollowerCtrl);
 router.post('/remfollowed/:idUser/:idFollowed', removeFollowedCtrl);
 router.get("/all/:numPage",getUsersPagCtrl);
 router.get("/all/count/docs",getCountUsers);
+router.get("/searchUserCtrl/:search",getSearchUserCtrl);
 
 
 

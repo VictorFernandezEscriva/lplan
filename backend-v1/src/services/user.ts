@@ -20,6 +20,12 @@ const getUsersPag = async( numPage: string) => {
   return responseItem;
 };
 
+const getSearchUser = async (search: string) => {
+  const regex = new RegExp(`^${search}`, 'i');
+  const responseItem = await UserModel.find({ appUser: regex }).limit(10);
+  return responseItem;
+};
+
 const getUser = async(id: string) => {
     const responseItem = await UserModel.findOne({_id: id});
     return responseItem;
@@ -118,4 +124,4 @@ const getAllFollowers = async (userId: string, numPage:string) => {
         return responseItem;
     };
 
-export {getCountUser,insertUser, getUser, getUsers, updateUser, deleteUser, getAllFollowed, getAllFollowers,addFollower,addFollowed,removeFollowed,removeFollower,getUsersPag};
+export {getCountUser,insertUser, getUser, getUsers, updateUser, deleteUser, getAllFollowed, getAllFollowers,addFollower,addFollowed,removeFollowed,removeFollower,getUsersPag, getSearchUser};
