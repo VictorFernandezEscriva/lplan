@@ -51,8 +51,8 @@ const Profile = () => {
             </div>
             <div className="profile-user-settings">
               <h1 className="profile-user-name">{currentUser.appUser}</h1>
-              <button className="btn_profile-edit-btn">Edit Profile</button>
-              <Link to="/settings" className="btn_profile-settings-btn" aria-label="profile settings">Settings<i className="fas fa-cog" aria-hidden="true"></i></Link>
+              <Link to="/profile/edituser" className="btn_profile-edit-btn">Edit Profile</Link>
+              <Link to="/profile/settings" className="btn_profile-settings-btn" aria-label="profile settings">Settings<i className="fas fa-cog" aria-hidden="true"></i></Link>
             </div>
             <div className="profile-stats">
               <ul>
