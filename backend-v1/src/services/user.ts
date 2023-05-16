@@ -21,9 +21,16 @@ const getUsersPag = async( numPage: string) => {
 };
 
 const getSearchUser = async (search: string) => {
+  const responseUser = await UserModel.findOne({ appUser: search });
+  
   const regex = new RegExp(`^${search}`, 'i');
   const responseItem = await UserModel.find({ appUser: regex }).limit(10);
-  return responseItem;
+
+  if(responseUser){
+    return [responseUser, ...responseItem.slice(0, 9)];
+  }else{
+    return responseItem;
+  }
 };
 
 const getUser = async(id: string) => {

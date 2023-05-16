@@ -1,6 +1,6 @@
 import { Request,Response } from "express";
 import { handleHttp } from "../utils/error.handle";
-import {getCountPublication, postOnePublication, getAllPublications, getNumPublications, getPublication, updateOnePublication, deleteOnePublication, updateLikes, getAllPaginatedPublications } from "../services/publication";
+import {getCountPublication, postOnePublication, getAllPublications, getNumPublications, getPublication, updateOnePublication, deleteOnePublication, updateLikes, getAllPaginatedPublications, getPublicationsFromFollowers } from "../services/publication";
 
 
 // (1) Get (obtain) comments ...
@@ -94,6 +94,7 @@ const getAllPaginatedPublicationsController=async({params}:Request,res:Response)
     }
 };
 
+// (9) Get all counted publications
 const getCountPublications=async(req:Request,res:Response)=>{
     try{
         const response=await getCountPublication();
@@ -104,4 +105,16 @@ const getCountPublications=async(req:Request,res:Response)=>{
     }
 };
 
-export{getCountPublications,postPublication, getPaginatePublications, getAllAvailablePublications, getOnePublication, updatePublication, deletePublication, updateLikesPublication, getAllPaginatedPublicationsController};
+// (10) Get all publications from my followers
+const getPublicationsFromFollowersCtrl=async({params}:Request,res:Response)=>{
+    try{
+        const {numPage, idUsuario}=params;
+        const response=await getPublicationsFromFollowers(numPage, idUsuario);
+        const data=response ? response:"NOT_FOUND";
+        res.send(data);
+    } catch(e){
+        handleHttp(res,"ERROR_GET_COUNT_PUBLICATIONS");
+    }
+};
+
+export{getCountPublications,postPublication, getPaginatePublications, getAllAvailablePublications, getOnePublication, updatePublication, deletePublication, updateLikesPublication, getAllPaginatedPublicationsController, getPublicationsFromFollowersCtrl};

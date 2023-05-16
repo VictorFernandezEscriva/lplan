@@ -3,6 +3,7 @@ import { ObjectId } from "mongoose";
 import paginate from 'mongoose-paginate-v2';
 import { Publication } from "../interfaces/publication.interface";
 import PublicationModel from "../models/publication";
+import UserModel from "../models/user";
 
 
 
@@ -60,9 +61,29 @@ const getAllPaginatedPublications = async(numPage: string) => {
     return responseItem;
 };
 
+// (9) Get all counted publications
 const getCountPublication = async() => {
 
     const responseItem = (await PublicationModel.countDocuments({})).toString();
     return responseItem;
 };
-export {getNumPublications,getCountPublication, postOnePublication, getAllPublications, getPublication, updateOnePublication, deleteOnePublication, updateLikes, getAllPaginatedPublications};
+
+// (10) Get all publications from my followers
+const getPublicationsFromFollowers = async (numPage: string, idUsuario: string) => {
+
+    // Obtener los IDs de los usuarios seguidos
+    const usuario = await UserModel.findById({_id:idUsuario}).exec();
+    const idsUsuariosSeguidos = usuario?.followersUser
+    if(!idsUsuariosSeguidos || idsUsuariosSeguidos.length ===0){
+      return [];
+    }
+
+    const PUBLICACIONES_POR_PAGINA = 3;
+    // Obtener las publicaciones de los usuarios seguidos
+    const salto = (parseInt(numPage) - 1) * PUBLICACIONES_POR_PAGINA;
+    const publicaciones = await PublicationModel.find({ idUserPublication: { $in: idsUsuariosSeguidos } }).sort({ createdAt: -1 }).skip(salto).limit(PUBLICACIONES_POR_PAGINA).exec();
+  
+    return publicaciones;
+  };
+
+export {getNumPublications,getCountPublication, postOnePublication, getAllPublications, getPublication, updateOnePublication, deleteOnePublication, updateLikes, getAllPaginatedPublications, getPublicationsFromFollowers};
