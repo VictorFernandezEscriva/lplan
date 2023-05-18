@@ -1,6 +1,7 @@
 import { Request,Response } from "express";
-import { insertUser,getUsers,getUser,updateUser,deleteUser, getCountUser,getAllFollowed, getAllFollowers, addFollowed,addFollower,removeFollowed,removeFollower, getUsersPag, getSearchUser} from "../services/user";
+import { insertUser,getUsers,getUser,updateUser,deleteUser, getCountUser,getAllFollowed, getAllFollowers, addFollowed,addFollower,removeFollowed,removeFollower, getUsersPag, getSearchUser, comprobarSeguidor} from "../services/user";
 import { handleHttp } from "../utils/error.handle";
+import { Types } from 'mongoose';
 
 const getPerson=async({params}:Request,res:Response)=>{
     try{
@@ -37,6 +38,16 @@ const getSearchUserCtrl=async({params}:Request,res:Response)=>{
 const getPeople=async(req:Request,res:Response)=>{
     try{
         const response=await getUsers();
+        res.send(response);
+    } catch(e){
+        handleHttp(res,"ERROR_GET_USERS");
+    }
+};
+
+const comprobarSeguidorCtrl=async({params}:Request,res:Response)=>{
+    try{
+        const {idUser, seguidorId}=params;
+        const response=await comprobarSeguidor(idUser,seguidorId);
         res.send(response);
     } catch(e){
         handleHttp(res,"ERROR_GET_USERS");
@@ -154,4 +165,4 @@ const getFollowersCtrl = async (req: Request, res: Response) => {
     }
 };
 
-export{getCountUsers,getPerson,getPeople,postPerson,updatePerson,deletePerson,getFollowersCtrl,getFollowedCtrl,follower,followed,removeFollowerCtrl,removeFollowedCtrl,getUsersPagCtrl, getSearchUserCtrl};
+export{getCountUsers,getPerson,getPeople,postPerson,updatePerson,deletePerson,getFollowersCtrl,getFollowedCtrl,follower,followed,removeFollowerCtrl,removeFollowedCtrl,getUsersPagCtrl, getSearchUserCtrl, comprobarSeguidorCtrl};
