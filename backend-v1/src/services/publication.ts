@@ -73,8 +73,8 @@ const getPublicationsFromFollowers = async (numPage: string, idUsuario: string) 
 
     // Obtener los IDs de los usuarios seguidos
     const usuario = await UserModel.findById({_id:idUsuario}).exec();
-    const idsUsuariosSeguidos = usuario?.followersUser
-    if(!idsUsuariosSeguidos || idsUsuariosSeguidos.length ===0){
+    const idsUsuariosSeguidos = usuario?.followedUser;
+    if(!idsUsuariosSeguidos || idsUsuariosSeguidos.length === 0){
       return [];
     }
 
