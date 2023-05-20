@@ -8,9 +8,12 @@ import PublicationModel from "../models/publication";
 
 // (1) Get (obtain) comments ...
 const getCommentsPublication = async(idPublication: string, numPage: string) => {
+    //console.log("idPublication" + idPublication)
+    console.log("numPage Comments" + numPage)
     const comentariosPorPagina = 2;
     const salto = (parseInt(numPage) - 1) * comentariosPorPagina;
-    const responseItem = await CommentModel.find({ idPublicationComment:idPublication }).skip(salto).limit(comentariosPorPagina).exec();// Saltar los comentarios ya vistos// Limitar la cantidad de comentarios devueltos
+    const responseItem = await CommentModel.find({ idPublicationComment:idPublication }).skip(salto).limit(comentariosPorPagina).populate("idUserComment").exec();// Saltar los comentarios ya vistos// Limitar la cantidad de comentarios devueltos
+    console.log("responseItem" + responseItem)
     return responseItem;
 };
 
