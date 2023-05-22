@@ -3,7 +3,7 @@
 import { Request, Response, Router } from "express";
 import { deletePerson, getPerson, getPeople, postPerson, updatePerson, getFollowersCtrl, getFollowedCtrl,follower,followed,removeFollowedCtrl,removeFollowerCtrl,getUsersPagCtrl, getCountUsers, getSearchUserCtrl, comprobarSeguidorCtrl } from "../controllers/user";
 import { logMiddleware } from "../middleware/log";
-import { checkAdmin } from "../middleware/session";
+import { checkAdmin, checkJwt } from "../middleware/session";
 
 const router = Router(); //es el manejador de las rutas, las interpreta, con esto podremos crear los GET, POST ....
 
@@ -13,7 +13,7 @@ const router = Router(); //es el manejador de las rutas, las interpreta, con est
 router.get("/users/all", logMiddleware, getPeople);
 router.get("/:idUser", getPerson);
 router.post("/",postPerson);
-router.put("/:idUser", updatePerson);
+router.put("/:idUser", checkJwt, updatePerson);
 router.delete("/:idUser", deletePerson);
 router.get("/follower/:userId/:numPage", getFollowersCtrl);
 router.get("/followed/:userId/:numPage", getFollowedCtrl);
@@ -23,7 +23,7 @@ router.delete('/remfollower/:idUser/:idFollower', removeFollowerCtrl);
 router.post('/remfollowed/:idUser/:idFollowed', removeFollowedCtrl);
 router.get("/all/:numPage",getUsersPagCtrl);
 router.get("/all/count/docs",getCountUsers);
-router.get("/searchUserCtrl/:search",getSearchUserCtrl);
+router.get("/search/:search",getSearchUserCtrl);
 router.get("/isFollower/:idUser/:seguidorId",comprobarSeguidorCtrl);
 
 

@@ -99,6 +99,11 @@ const addFollower = async (idUser: string, idFollower: string) => {
     {$addToSet:{followersUser:new Types.ObjectId(idFollower)}},
     {new:true}
   ).populate('followersUser');
+  const item=await UserModel.findOneAndUpdate(
+    {_id:idFollower},
+    {$addToSet:{followedUser:new Types.ObjectId(idUser)}},
+    {new:true}
+  )
   console.log(responseItem);
   return responseItem;
 };
@@ -111,6 +116,11 @@ const addFollowed = async (idUser: string, idFollower: string) => {
     {$addToSet:{followedUser:new Types.ObjectId(idFollower)}},
     {new:true}
   ).populate('followedUser');
+  const item=await UserModel.findOneAndUpdate(
+    {_id:idFollower},
+    {$addToSet:{followersUser:new Types.ObjectId(idUser)}},
+    {new:true}
+  )
   console.log(responseItem);
   return responseItem;
 };
@@ -124,6 +134,11 @@ const removeFollowed = async (idUser: string, idFollowed: string) => {
   if (!responseItem) {
     throw new Error('User not found');
   }
+  const item = await UserModel.findOneAndUpdate(
+    {_id: idFollowed},
+    {$pull: {followersUser: new Types.ObjectId(idUser)}},
+    {new: true}
+  )
   return responseItem;
 };
 

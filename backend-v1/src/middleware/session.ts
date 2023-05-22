@@ -40,6 +40,7 @@ const checkJwt = (req: RequestExt, res: Response, next: NextFunction) => {
       res.send("NO_TIENES_UN_JWT_VALIDO");
     } else {
       req.user = isUser;
+      console.log("Tienes un jwt valido: " + jwt);
       next();
     }
   } catch (e) {
