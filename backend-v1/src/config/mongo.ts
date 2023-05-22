@@ -6,7 +6,6 @@ async function dbConnect(): Promise<void>{
     const DB_URI=<string>process.env.DB_URI; //Necesitamos una variable nueva que se llama DB_URI.
                                              //Esta variable hace referencia a lo que es el string para conectarnos al Mongo.
                                              //Tenemos que ir al archivo .env y crear la misma variable
-    console.log(DB_URI);
     await connect(DB_URI);
 }
 
