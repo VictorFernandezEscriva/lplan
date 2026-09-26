@@ -1,41 +1,32 @@
-lib-cov
-*.seed
-*.log
-*.csv
-*.dat
-*.out
-*.pid
-*.gz
-*.swp
+# Dependencies
+node_modules/
+bower_components/
 
-pids
-logs
-results
-tmp
+# Environment variables / secrets
+.env
+.env.*
+!.env.example
 
-# Build
+# Build output
+dist/
 public/css/main.css
 
-# Coverage reports
-coverage
+# Coverage
+coverage/
 
-# API keys and secrets
-#.env
+# Logs and temporary files
+*.log
+*.pid
+*.swp
 
-# Dependency directory
-node_modules/
-bower_components
+logs/
+tmp/
+results/
 
 # Editors
-.idea
+.idea/
 *.iml
 
-# OS metadata
+# OS files
 .DS_Store
 Thumbs.db
-
-# Ignore built ts files
-dist/**/*
-
-# ignore yarn.lock
-yarn.lock
