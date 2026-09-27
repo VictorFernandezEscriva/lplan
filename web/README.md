@@ -1,46 +1,94 @@
-# Getting Started with Create React App
+# LPlan Web
 
-This project was bootstrapped with [Create React App](https://github.com/facebook/create-react-app).
+Browser client for **LPlan**, built with React and TypeScript.
 
-## Available Scripts
+The web application provides the main desktop/browser experience for the platform and consumes the LPlan backend APIs.
 
-In the project directory, you can run:
+> For the complete project overview, architecture and team history, see the [root README](../README.md).
 
-### `npm start`
+## Main Functionality
 
-Runs the app in the development mode.\
-Open [http://localhost:3000](http://localhost:3000) to view it in the browser.
+The web client contains functionality around:
 
-The page will reload if you make edits.\
-You will also see any lint errors in the console.
+- User authentication and profiles
+- Feed and publications
+- Comments and likes
+- Activity discovery
+- Activity participation
+- Calendar views
+- Maps and locations
+- Chat
+- Profile and content sharing
+- Statistics and charts
+- Localization
+- Loading and feedback states
 
-### `npm test`
+## Tech Stack
 
-Launches the test runner in the interactive watch mode.\
-See the section about [running tests](https://facebook.github.io/create-react-app/docs/running-tests) for more information.
+- React
+- TypeScript
+- React Router
+- Axios
+- FullCalendar
+- Leaflet / React Leaflet
+- Chart.js
+- Socket.IO Client
+- i18next
+- Google OAuth
+- SweetAlert2
+- React Icons
+- ESLint
+- Prettier
 
-### `npm run build`
+## Local Setup
 
-Builds the app for production to the `build` folder.\
-It correctly bundles React in production mode and optimizes the build for the best performance.
+Install dependencies:
 
-The build is minified and the filenames include the hashes.\
-Your app is ready to be deployed!
+```bash
+npm install
+```
 
-See the section about [deployment](https://facebook.github.io/create-react-app/docs/deployment) for more information.
+Create a local environment file:
 
-### `npm run eject`
+```bash
+cp .env.example .env
+```
 
-**Note: this is a one-way operation. Once you `eject`, you can’t go back!**
+On Windows PowerShell:
 
-If you aren’t satisfied with the build tool and configuration choices, you can `eject` at any time. This command will remove the single build dependency from your project.
+```powershell
+Copy-Item .env.example .env
+```
 
-Instead, it will copy all the configuration files and the transitive dependencies (webpack, Babel, ESLint, etc) right into your project so you have full control over them. All of the commands except `eject` will still work, but they will point to the copied scripts so you can tweak them. At this point you’re on your own.
+Fill in the required values and start the development server:
 
-You don’t have to ever use `eject`. The curated feature set is suitable for small and middle deployments, and you shouldn’t feel obligated to use this feature. However we understand that this tool wouldn’t be useful if you couldn’t customize it when you are ready for it.
+```bash
+npm start
+```
 
-## Learn More
+The application is served by the Create React App development server.
 
-You can learn more in the [Create React App documentation](https://facebook.github.io/create-react-app/docs/getting-started).
+## Other Commands
 
-To learn React, check out the [React documentation](https://reactjs.org/).
+Run tests:
+
+```bash
+npm test
+```
+
+Create a production build:
+
+```bash
+npm run build
+```
+
+## Backend
+
+This client was developed alongside the LPlan backend and later adapted to the hexagonal backend version:
+
+- [`backend-v1`](../backend-v1/)
+- [`backend-v2-hexagonal`](../backend-v2-hexagonal/)
+
+## Status
+
+Archived project component. The code reflects the original 2023 implementation and dependency versions.

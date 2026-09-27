@@ -101,7 +101,7 @@ Original contributors include:
 - **oscarboullosa**
 - **eloimoncho**
 - **Genisc13**
-- **Quim Moran M**
+- **Marc Moran M**
 
 The project should therefore be understood as team work rather than as an individual application.
 
