@@ -1,0 +1,32 @@
+# Dependencies
+node_modules/
+
+# Build output
+dist/
+tmp/
+out-tsc/
+bazel-out/
+
+# Angular
+.angular/cache/
+coverage/
+
+# Logs
+*.log
+npm-debug.log*
+yarn-error.log*
+
+# Editors
+.vscode/
+.idea/
+.history/
+*.iml
+*.swp
+*.swo
+*_LOCAL_*
+*_BASE_*
+*_REMOTE_*
+
+# System files
+.DS_Store
+Thumbs.db
