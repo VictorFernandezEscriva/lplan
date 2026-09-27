@@ -1,0 +1,32 @@
+# Dependencies
+node_modules/
+bower_components/
+
+# Environment variables / secrets
+.env
+.env.*
+!.env.example
+
+# Build output
+dist/
+public/css/main.css
+
+# Coverage
+coverage/
+
+# Logs and temporary files
+*.log
+*.pid
+*.swp
+
+logs/
+tmp/
+results/
+
+# Editors
+.idea/
+*.iml
+
+# OS files
+.DS_Store
+Thumbs.db
